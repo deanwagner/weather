@@ -3,6 +3,6 @@
 Photo by [Debasish Vishal](https://www.pexels.com/@debasish-vishal-2516081) from [Pexels](https://www.pexels.com/)  
 | Text    | Title   | Accent  | Item    | BG      |  
 |:-------:|:-------:|:-------:|:-------:|:-------:|  
-| #000000 | #000000 | #000000 | #000000 | #000000 |  
+| #FBFAF9 | #E77EA2 | #C08ED7 | #152668 | #191945 |  
 
 
