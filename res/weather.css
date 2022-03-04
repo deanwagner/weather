@@ -1,0 +1,234 @@
+/* Import Assets */
+/* @import ''; */
+
+/* * * * * * * * * * * *\
+ *      Weather        *
+ *                     *
+ *  By: Dean Wagner    *
+ * info@deanwagner.net *
+ *                     *
+ *   Assignment for:   *
+ *  The Odin Project   *
+ * theodinproject.com  *
+\* * * * * * * * * * * */
+
+:root {
+    /* Default Colors */
+    --color-shadow : #000000;
+    --color-bg     : #191945;
+    --color-item   : #152668;
+    --color-text   : #fbfaf9;
+    --color-title  : #e77ea2;
+    --color-accent : #c08ed7;
+
+    /* Shadow/Glow */
+    --shadow-box   : 0 0 1rem var(--color-shadow);
+    --shadow-title : 0.15rem 0.15rem 0.05rem var(--color-shadow);
+    --shadow-link  : 0.1rem 0.1rem 0.1rem var(--color-shadow);
+    --shadow-text  : 0.05rem 0.05rem 0.2rem var(--color-shadow);
+    --glow-box     : 0 0 0.3rem var(--color-title);
+    --glow-text    : 0 0 0.2rem var(--color-title);
+
+    /* Borders */
+    --border-solid  : 1px solid var(--color-shadow);
+    --outline-solid : 2px solid var(--color-accent);
+
+    /* Font Families */
+    --font-base  : Tahoma, Verdana, Geneva, sans-serif;
+    --font-input : 'Courier New', Courier, monospace;
+
+    /* Transitions */
+    --transition-all : none;
+    --enable-all     : all 0.2s ease-out;
+
+    /* Flags changed in Media Queries */
+    --dark-mode: 0;
+    --mobile-view: 0;
+
+    /* Browser Theme */
+    color-scheme: dark;
+}
+
+* {
+    box-sizing: border-box;
+    cursor: default;
+    accent-color: var(--color-accent);
+}
+
+/* * * * * * * * *\
+ * Element Base  *
+\* * * * * * * * */
+
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--color-bg);
+    background-image: url('../img/storm-night.webp');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: var(--color-text);
+    font-family: var(--font-base);
+    font-size: 12pt;
+    margin: 0;
+    min-height: 100vh;
+    padding: 0;
+    text-shadow: var(--shadow-text);
+}
+
+a, a * {
+    cursor: pointer;
+    transition: var(--transition-all);
+}
+
+a, a:link, a:visited {
+    color: var(--color-accent);
+    text-decoration: none;
+    text-shadow: var(--shadow-link);
+}
+
+a:hover, a:focus, a:active {
+    color: var(--color-title);
+    text-decoration: underline;
+    text-shadow: var(--glow-text);
+}
+
+/* * * * * * * * *\
+ *    Header     *
+\* * * * * * * * */
+
+header {
+
+}
+
+/* * * * * * * * *\
+ *     Aside     *
+\* * * * * * * * */
+
+aside {
+
+}
+
+/* * * * * * * * *\
+ *  Navigation   *
+\* * * * * * * * */
+
+nav {
+
+}
+
+nav a,
+nav a:link,
+nav a:visited {
+
+}
+
+nav a:hover,
+nav a:focus,
+nav a:active {
+
+}
+
+/* * * * * * * * *\
+ *     Main      *
+\* * * * * * * * */
+
+main {
+
+}
+
+/* * * * * * * * *\
+ *    Section    *
+\* * * * * * * * */
+
+section {
+
+}
+
+/* * * * * * * * *\
+ *    Footer     *
+\* * * * * * * * */
+
+footer {
+
+}
+
+/* * * * * * * * *\
+ *  GitHub Icon  *
+\* * * * * * * * */
+
+.github-link svg {
+    filter: drop-shadow(var(--shadow-text));
+    height: 2.3em;
+    transition: var(--transition-all);
+    width: 2.3em;
+}
+
+.github-link svg path {
+    fill: var(--color-accent);
+}
+
+.github-link:hover svg,
+.github-link:focus svg,
+.github-link:active svg {
+    filter: drop-shadow(var(--glow-box));
+    transform: rotate(360deg) scale(1.5);
+}
+
+.github-link:hover svg path,
+.github-link:focus svg path,
+.github-link:active svg path {
+    fill: var(--color-title);
+}
+
+/* * * * * * * * *\
+ *    Modals     *
+\* * * * * * * * */
+
+#modal > div {
+    background-color: var(--color-item);
+    box-shadow: var(--shadow-box);
+    padding: 2em;
+}
+
+#modal div h3 {
+    font-size: 1.4rem;
+    font-weight: normal;
+    margin: 0 0 1em;
+    text-align: center;
+}
+
+#modal .close_modal svg {
+    filter: drop-shadow(var(--shadow-link));
+}
+
+#modal .close_modal svg path {
+    fill: var(--color-accent);
+}
+
+#modal .close_modal:hover svg {
+    filter: drop-shadow(var(--glow-text));
+}
+
+#modal .close_modal:hover svg path {
+    fill: var(--color-title);
+}
+
+/* * * * * * * * *\
+ * Media Queries *
+\* * * * * * * * */
+
+@media screen and (max-width: 1200px) {
+
+}
+
+@media screen and (orientation: portrait) {
+    :root { --mobile-view: 1; }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root { --dark-mode: 1; }
+}
