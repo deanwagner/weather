@@ -1,2 +1,5 @@
-# weather
-Local Weather App
+# Weather
+### Local Weather App
+
+Live Demo:  
+https://deanwagner.github.io/weather/
