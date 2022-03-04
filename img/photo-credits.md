@@ -4,5 +4,5 @@ Photo by [Debasish Vishal](https://www.pexels.com/@debasish-vishal-2516081) from
 | Text    | Title   | Accent  | Item    | BG      |  
 |:-------:|:-------:|:-------:|:-------:|:-------:|  
 | #FBFAF9 | #E77EA2 | #C08ED7 | #152668 | #191945 |  
-
+| ![.](https://via.placeholder.com/80x40/FBFAF9?text=+) | ![.](https://via.placeholder.com/80x40/E77EA2?text=+) | ![.](https://via.placeholder.com/80x40/C08ED7?text=+) | ![.](https://via.placeholder.com/80x40/152668?text=+) | ![.](https://via.placeholder.com/80x40/191945?text=+) 
 
