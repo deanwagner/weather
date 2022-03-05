@@ -7,13 +7,11 @@ import Icons from './icons.js'
 /**
  * Weather
  * @class
- * @property {string} icons - Icons Object
  * @author Dean Wagner <info@deanwagner.net>
  */
 class Weather {
 
     // Class Properties
-    icons = Icons;
 
     /**
      * Constructor

@@ -18,3 +18,13 @@ Photo by [Andrew Beatson](https://www.pexels.com/@andrew-beatson-2114196) from [
 | #F5F6F4 | #C5C6C1 | #8B8E91 | #5A646A | #19242B |  
 | ![.](https://via.placeholder.com/70x30/F5F6F4?text=+) | ![.](https://via.placeholder.com/70x30/C5C6C1?text=+) | ![.](https://via.placeholder.com/70x30/8B8E91?text=+) | ![.](https://via.placeholder.com/70x30/5A646A?text=+) | ![.](https://via.placeholder.com/70x30/19242B?text=+) |
 
+----
+
+### Clear - Day
+![clear-day](./clear-day.webp)
+Photo by [Elia Clerici](https://unsplash.com/@ielix) on [Unsplash](https://unsplash.com/)
+
+| Text    | Title   | Accent  | Item    | BG      |  
+|:-------:|:-------:|:-------:|:-------:|:-------:|  
+| #EDF8FD | #B1E4FB | #78D5F7 | #1571B7 | #0A3670 |  
+| ![.](https://via.placeholder.com/70x30/EDF8FD?text=+) | ![.](https://via.placeholder.com/70x30/B1E4FB?text=+) | ![.](https://via.placeholder.com/70x30/78D5F7?text=+) | ![.](https://via.placeholder.com/70x30/1571B7?text=+) | ![.](https://via.placeholder.com/70x30/0A3670?text=+) |
