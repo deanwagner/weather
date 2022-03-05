@@ -22,31 +22,31 @@
     --color-accent : #c08ed7;
 
     /* Shadow/Glow */
-    --shadow-box   : 0 0 1rem var(--color-shadow);
-    --shadow-title : 0.15rem 0.15rem 0.05rem var(--color-shadow);
-    --shadow-link  : 0.1rem 0.1rem 0.1rem var(--color-shadow);
-    --shadow-text  : 0.05rem 0.05rem 0.2rem var(--color-shadow);
-    --glow-box     : 0 0 0.3rem var(--color-title);
-    --glow-text    : 0 0 0.2rem var(--color-title);
+    --shadow-box   : 0 0 1rem;
+    --shadow-title : 0.15rem 0.15rem 0.05rem;
+    --shadow-link  : 0.1rem 0.1rem 0.1rem;
+    --shadow-text  : 0.05rem 0.05rem 0.2rem;
+    --glow-box     : 0 0 0.3rem;
+    --glow-text    : 0 0 0.2rem;
 
     /* Borders */
-    --border-solid  : 1px solid var(--color-shadow);
-    --outline-solid : 2px solid var(--color-accent);
+    --border-solid  : 1px solid;
+    --outline-solid : 2px solid;
 
     /* Font Families */
     --font-base  : Tahoma, Verdana, Geneva, sans-serif;
-    --font-input : 'Courier New', Courier, monospace;
+    --font-title : Georgia, Cambria, serif;
+    --font-mono  : 'Courier New', Courier, monospace;
 
     /* Transitions */
-    --transition-all : none;
-    --enable-all     : all 0.2s ease-out;
+    --transition-all : all 0.2s ease-out;
+    --enable-all     : none;
 
     /* Flags changed in Media Queries */
-    --dark-mode: 0;
     --mobile-view: 0;
 
     /* Browser Theme */
-    color-scheme: dark;
+    color-scheme: light;
 }
 
 * {
@@ -76,7 +76,7 @@ body {
     margin: 0;
     min-height: 100vh;
     padding: 0;
-    text-shadow: var(--shadow-text);
+    text-shadow: var(--shadow-text) var(--color-shadow);
 }
 
 a, a * {
@@ -87,13 +87,31 @@ a, a * {
 a, a:link, a:visited {
     color: var(--color-accent);
     text-decoration: none;
-    text-shadow: var(--shadow-link);
+    text-shadow: var(--shadow-link) var(--color-shadow);
 }
 
 a:hover, a:focus, a:active {
     color: var(--color-title);
     text-decoration: underline;
-    text-shadow: var(--glow-text);
+    text-shadow: var(--glow-text) var(--color-title);
+}
+
+svg {
+    filter: drop-shadow(var(--shadow-text) var(--color-shadow));
+    height: 5rem;
+    width: 5rem;
+    transition: var(--transition-all);
+}
+
+svg path {
+    fill: var(--color-text);
+    transition: var(--transition-all);
+}
+
+h1, h2, h3, h4 {
+    color: var(--color-title);
+    font-family: var(--font-title);
+    margin: 0 0 1em;
 }
 
 /* * * * * * * * *\
@@ -161,7 +179,7 @@ footer {
 \* * * * * * * * */
 
 .github-link svg {
-    filter: drop-shadow(var(--shadow-text));
+    filter: drop-shadow(var(--shadow-text) var(--color-shadow));
     height: 2.3em;
     transition: var(--transition-all);
     width: 2.3em;
@@ -174,7 +192,7 @@ footer {
 .github-link:hover svg,
 .github-link:focus svg,
 .github-link:active svg {
-    filter: drop-shadow(var(--glow-box));
+    filter: drop-shadow(var(--glow-box) var(--color-title));
     transform: rotate(360deg) scale(1.5);
 }
 
@@ -190,7 +208,7 @@ footer {
 
 #modal > div {
     background-color: var(--color-item);
-    box-shadow: var(--shadow-box);
+    box-shadow: var(--shadow-box) var(--color-shadow);
     padding: 2em;
 }
 
@@ -202,7 +220,7 @@ footer {
 }
 
 #modal .close_modal svg {
-    filter: drop-shadow(var(--shadow-link));
+    filter: drop-shadow(var(--shadow-link) var(--color-shadow));
 }
 
 #modal .close_modal svg path {
@@ -210,7 +228,7 @@ footer {
 }
 
 #modal .close_modal:hover svg {
-    filter: drop-shadow(var(--glow-text));
+    filter: drop-shadow(var(--glow-text) var(--color-shadow) var(--color-title));
 }
 
 #modal .close_modal:hover svg path {
@@ -230,5 +248,5 @@ footer {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root { --dark-mode: 1; }
+    :root { color-scheme: dark; }
 }
