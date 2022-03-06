@@ -14,16 +14,15 @@
 
 :root {
     /* Default Colors */
-    --color-shadow : #000000;
-    --color-bg     : #191945;
-    --color-item   : #152668;
-    --color-text   : #fbfaf9;
-    --color-title  : #e77ea2;
-    --color-accent : #c08ed7;
+    --color-text   : #F5F5F4;
+    --color-title  : #FEE7D8;
+    --color-accent : #E9C1AF;
+    --color-item   : #7F9BAA;
+    --color-shadow : #526575;
 
     /* Shadow/Glow */
     --shadow-box   : 0 0 1rem;
-    --shadow-title : 0.15rem 0.15rem 0.05rem;
+    --shadow-title : 0.15rem 0.15rem 0;
     --shadow-link  : 0.1rem 0.1rem 0.1rem;
     --shadow-text  : 0.05rem 0.05rem 0.2rem;
     --glow-box     : 0 0 0.3rem;
@@ -65,14 +64,18 @@ html {
 }
 
 body {
-    background-color: var(--color-bg);
-    background-image: url('../img/storm-night.webp');
+    align-items: flex-start;
+    background-color: var(--color-shadow);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
+    box-shadow: inset 0 0 5em var(--color-shadow);
     color: var(--color-text);
+    display: flex;
+    flex-direction: column;
     font-family: var(--font-base);
     font-size: 12pt;
+    justify-content: flex-start;
     margin: 0;
     min-height: 100vh;
     padding: 0;
@@ -112,6 +115,17 @@ h1, h2, h3, h4 {
     color: var(--color-title);
     font-family: var(--font-title);
     margin: 0 0 1em;
+    text-shadow: var(--shadow-title) var(--color-shadow);
+}
+
+h1 {
+    margin: 0;
+    flex: 1;
+    font-size: 2.5em;
+}
+
+.container {
+    background-image: linear-gradient(to bottom right, rgba(255,255,255,0.1), rgba(0,0,0,0.1));
 }
 
 /* * * * * * * * *\
@@ -119,15 +133,20 @@ h1, h2, h3, h4 {
 \* * * * * * * * */
 
 header {
-
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5em;
+    width: 100%;
 }
 
-/* * * * * * * * *\
- *     Aside     *
-\* * * * * * * * */
+header > svg {
+    height: 2.5em;
+    width: 2.5em;
+}
 
-aside {
-
+header > svg path {
+    fill: var(--color-title);
 }
 
 /* * * * * * * * *\
@@ -141,7 +160,7 @@ nav {
 nav a,
 nav a:link,
 nav a:visited {
-
+    display: block;
 }
 
 nav a:hover,
@@ -155,7 +174,8 @@ nav a:active {
 \* * * * * * * * */
 
 main {
-
+    flex: 1;
+    width: 100%;
 }
 
 /* * * * * * * * *\
@@ -166,12 +186,33 @@ section {
 
 }
 
+main #current {
+    align-items: flex-start;
+    display: flex;
+    justify-content: space-between;
+}
+
+main #forecast {
+    align-items: flex-start;
+    display: flex;
+    justify-content: space-between;
+}
+
 /* * * * * * * * *\
  *    Footer     *
 \* * * * * * * * */
 
 footer {
+    align-items: flex-start;
+    display: flex;
+    font-size: 0.8em;
+    justify-content: space-between;
+    padding: 0.5em;
+    width: 100%;
+}
 
+footer cite {
+    font-style: normal;
 }
 
 /* * * * * * * * *\

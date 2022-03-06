@@ -6,11 +6,11 @@
         <meta name="author" content="Dean Wagner">
         <meta name="description" content="Local Weather Conditions and Forecast">
         <title>Weather</title>
-        <link rel="stylesheet" href="./res/weather.css">
+        <link rel="icon" sizes="any" type="image/svg+xml" href="./img/weather.svg">
         <!--
-        <link rel="icon" sizes="any" type="image/svg+xml" href="./img/blank.svg">
         <link rel="manifest" href="blank.webmanifest">
         -->
+        <link rel="stylesheet" href="./res/weather.css">
         <script type="module">
             import Weather from './res/weather.js';
             window.addEventListener('DOMContentLoaded', () => {
@@ -34,30 +34,33 @@
                Header
         <--- ------------ -->
         <header>
+            <svg viewBox="0 0 24 24"><path d="M12.74,5.47C15.1,6.5 16.35,9.03 15.92,11.46C17.19,12.56 18,14.19 18,16V16.17C18.31,16.06 18.65,16 19,16A3,3 0 0,1 22,19A3,3 0 0,1 19,22H6A4,4 0 0,1 2,18A4,4 0 0,1 6,14H6.27C5,12.45 4.6,10.24 5.5,8.26C6.72,5.5 9.97,4.24 12.74,5.47M11.93,7.3C10.16,6.5 8.09,7.31 7.31,9.07C6.85,10.09 6.93,11.22 7.41,12.13C8.5,10.83 10.16,10 12,10C12.7,10 13.38,10.12 14,10.34C13.94,9.06 13.18,7.86 11.93,7.3M13.55,3.64C13,3.4 12.45,3.23 11.88,3.12L14.37,1.82L15.27,4.71C14.76,4.29 14.19,3.93 13.55,3.64M6.09,4.44C5.6,4.79 5.17,5.19 4.8,5.63L4.91,2.82L7.87,3.5C7.25,3.71 6.65,4.03 6.09,4.44M18,9.71C17.91,9.12 17.78,8.55 17.59,8L19.97,9.5L17.92,11.73C18.03,11.08 18.05,10.4 18,9.71M3.04,11.3C3.11,11.9 3.24,12.47 3.43,13L1.06,11.5L3.1,9.28C3,9.93 2.97,10.61 3.04,11.3M19,18H16V16A4,4 0 0,0 12,12A4,4 0 0,0 8,16H6A2,2 0 0,0 4,18A2,2 0 0,0 6,20H19A1,1 0 0,0 20,19A1,1 0 0,0 19,18Z" /></svg>
             <h1>Weather</h1>
             <a class="github-link" href="" title="GitHub Repo for this Project" rel="external" target="_blank"><svg viewBox="0 0 32 32"><path d="M16.0018,0A16.2088,16.2088,0,0,0,0,16.4223,16.4156,16.4156,0,0,0,10.7179,31.9376c.84.2166.7114-.3966.7114-.8153v-2.846c-4.8513.5839-5.0479-2.7138-5.3732-3.2646-.6578-1.1531-2.213-1.4469-1.7482-1.9977,1.1047-.5839,2.2308.1469,3.5357,2.1262.9438,1.4359,2.7849,1.1935,3.718.9548a4.664,4.664,0,0,1,1.24-2.2327c-5.0264-.9254-7.1214-4.0762-7.1214-7.8219A7.3467,7.3467,0,0,1,7.4074,11.204a6.5675,6.5675,0,0,1,.1752-4.4067C9.66,6.6064,11.819,8.325,11.987,8.4609a15.14,15.14,0,0,1,4.0362-.5,15.1577,15.1577,0,0,1,4.0577.51c.404-.3158,2.406-1.7921,4.3365-1.6121a6.6124,6.6124,0,0,1,.1966,4.3332,7.3488,7.3488,0,0,1,1.7482,4.8584c0,3.7531-2.1093,6.9075-7.15,7.8182a4.7469,4.7469,0,0,1,1.362,3.3418v4.1313c.0286.3305,0,.6573.5363.6573A16.4082,16.4082,0,0,0,32,16.426,16.2136,16.2136,0,0,0,16.0018,0Z" /></svg></a>
         </header>
 
         <!-- ------------ -!>
-               Aside
-        <--- ------------ -->
-        <aside>
-
-        </aside>
-
-        <!-- ------------ -!>
-               Navigation
-        <--- ------------ -->
-        <nav>
-            <a id="" title="" href="#">Link</a>
-        </nav>
-
-        <!-- ------------ -!>
                 Main
         <--- ------------ -->
         <main>
-            <section>
+            <section id="current">
+                <div id="main_cond">
 
+                </div>
+                <div id="sub_cond"></div>
+            </section>
+            <section id="forecast">
+                <nav class="container">
+                    <a data-theme="clear-day" href="#">Clear Day</a>
+                    <a data-theme="clear-night" href="#">Clear Night</a>
+                    <a data-theme="clouds" href="#">Clouds</a>
+                    <a data-theme="drizzle" href="#">Drizzle</a>
+                    <a data-theme="rain" href="#">Rain</a>
+                    <a data-theme="storm" href="#">Storm</a>
+                    <a data-theme="snow" href="#">Snow</a>
+                    <a data-theme="haze" href="#">Haze</a>
+                    <a data-theme="wind" href="#">Wind</a>
+                </nav>
             </section>
         </main>
 
@@ -65,8 +68,11 @@
                Footer
         <--- ------------ -->
         <footer>
-            Created by <a href="https://deanwagner.net/" rel="external" target="_blank">Dean Wagner</a>
-            for <a href="https://theodinproject.com/" rel="external" target="_blank">The Odin Project</a>
+            <cite>photo</cite>
+            <div>
+                Created by <a href="https://deanwagner.net/" rel="external" target="_blank">Dean Wagner</a>
+                for <a href="https://theodinproject.com/" rel="external" target="_blank">The Odin Project</a>
+            </div>
         </footer>
 
         <!-- ------------ -!>
