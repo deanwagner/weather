@@ -106,7 +106,7 @@ export default
 }, {
       name    : 'wind',
       image   : 'wind.webp',
-      place   : 'bottom center',
+      place   : 'center center',
       credit  : 'Sander Weeteling',
       profile : 'https://unsplash.com/@sanderweeteling',
       site    : 'Unsplash',

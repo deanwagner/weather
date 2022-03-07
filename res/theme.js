@@ -14,16 +14,18 @@ class Theme {
 
     constructor() {
         //test links
-        const a = document.querySelectorAll('nav a');
+        const a = document.querySelectorAll('#modal_settings a');
         for(let i = 0; i < a.length; i++) {
             a[i].addEventListener('click', (e) => {
                 e.preventDefault();
-                this.setTheme(e.target.dataset.theme);
+                const tod = (e.target.dataset.hasOwnProperty('tod')) ? e.target.dataset.tod : 'day';
+                this.setTheme(e.target.dataset.theme, tod);
             });
         }
     }
 
-    setTheme(name) {
+    setTheme(str, tod) {
+        const name  = this.getTheme(str, tod);
         const theme = Themes.find(thm => thm.name === name);
 
         this.styles.forEach(style => {
@@ -42,6 +44,11 @@ class Theme {
 
         const cite = document.getElementsByTagName('cite')[0];
         cite.innerHTML = `Photo by <a href="${theme.profile}" rel="external" target="_blank">${theme.credit}</a> from <a href="${theme.link}" rel="external" target="_blank">${theme.site}</a>`;
+
+        if (document.body.classList.contains('loading')) {
+            document.getElementById('loading').style.display = 'none';
+            document.body.classList.remove('loading');
+        }
     }
 
     getTheme(cond, tod) {
@@ -88,16 +95,6 @@ class Theme {
             g: parseInt(result[2], 16),
             b: parseInt(result[3], 16)
         } : null;
-    }
-
-    /**
-     * Get CSS Property
-     * @param {string} prop - Property
-     * @returns {string} - Value
-     */
-    getStyleProperty(prop) {
-        const property = '--color-' + prop;
-        return getComputedStyle(document.documentElement).getPropertyValue(property).trim();
     }
 
     /**
