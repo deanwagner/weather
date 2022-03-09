@@ -35,7 +35,7 @@ class Weather {
         'Saturday'
     ];
 
-    temp = 'http://api.openweathermap.org/data/2.5/onecall?lat=34.0522&lon=-118.2437&units=imperial&exclude=minutely&APPID=08741ea66d7d6792d95ff754f4184d75';
+    temp = 'https://api.openweathermap.org/data/2.5/onecall?lat=34.0522&lon=-118.2437&units=imperial&exclude=minutely&APPID=08741ea66d7d6792d95ff754f4184d75';
 
     /**
      * Constructor
