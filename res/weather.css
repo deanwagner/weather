@@ -135,6 +135,10 @@ h2 {
     margin: 0 0 0.5rem;
 }
 
+h3 {
+    margin: 0;
+}
+
 .container {
     background-image: linear-gradient(to bottom right, rgba(255,255,255,0.1), rgba(0,0,0,0.1));
     border: var(--border-solid) var(--color-shadow);
@@ -262,6 +266,31 @@ main #forecast {
     grid-column-gap: 1em;
     grid-row-gap: 1em;
     padding: 2em;
+}
+
+main #forecast > div > div {
+    padding-bottom: 0.5em;
+    white-space: nowrap;
+}
+
+main #forecast > div > div:last-child {
+    padding-bottom: 0;
+}
+
+main #forecast svg {
+    height: 1em;
+    margin-right: 0.5em;
+    width: 1em;
+}
+
+main #forecast .forecast_icon {
+    text-align: center;
+}
+
+main #forecast .forecast_icon svg {
+    height: 5em;
+    margin: 0 auto;
+    width: 5em;
 }
 
 /* * * * * * * * *\
@@ -427,7 +456,7 @@ footer cite {
  * Media Queries *
 \* * * * * * * * */
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1350px) {
     main #forecast { grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 1fr); }
 }
 

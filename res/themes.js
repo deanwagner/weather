@@ -26,8 +26,8 @@ export default
       item    : '#122E4F',
       shadow  : '#11202D'
 }, {
-      name    : 'clouds',
-      image   : 'clouds.webp',
+      name    : 'clouds-day',
+      image   : 'clouds-day.webp',
       place   : 'bottom left',
       credit  : 'Wayne Low',
       profile : 'https://unsplash.com/@wayneshin',
@@ -38,6 +38,19 @@ export default
       accent  : '#E9C1AF',
       item    : '#7F9BAA',
       shadow  : '#526575'
+}, {
+      name    : 'clouds-night',
+      image   : 'clouds-night.webp',
+      place   : 'bottom right',
+      credit  : 'Zoltan Tasi',
+      profile : 'https://unsplash.com/@zoltantasi',
+      site    : 'Unsplash',
+      link    : 'https://unsplash.com/photos/h_gwdi8UH2o',
+      text    : '#F1EEE4',
+      title   : '#A8AB9C',
+      accent  : '#B7A07B',
+      item    : '#3B413A',
+      shadow  : '#141414'
 }, {
       name    : 'drizzle',
       image   : 'drizzle.webp',
@@ -118,5 +131,25 @@ export default
       shadow  : '#221C1C'
 }]
 /*
+https://unsplash.com/@suicide_chewbacca
+Ashwini Chaudhary
+
+https://unsplash.com/photos/czPD6s3JQmk
+Unsplash
+
+--------------------------------------
+
+https://unsplash.com/@shaktirajpurohit
+Shakti Rajpurohit
+
+Unsplash</a>
+https://unsplash.com/photos/ggs-47SjYy0
+
+
+
+
+horizon
+Photo by <a href="https://unsplash.com/@marekpiwnicki?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Marek Piwnicki</a> on <a href="https://unsplash.com/s/photos/night-sky?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+https://unsplash.com/photos/3UDtthnV5hI
 
 */

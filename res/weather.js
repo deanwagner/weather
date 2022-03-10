@@ -2,8 +2,7 @@
 
 // Import Modules
 import Theme from './theme.js';
-import Icons from './icons.js'
-import Moon  from './moon.js'
+import Icons from './icons.js';
 
 /**
  * Weather
@@ -35,7 +34,9 @@ class Weather {
         'Saturday'
     ];
 
-    temp = 'https://api.openweathermap.org/data/2.5/onecall?lat=34.0522&lon=-118.2437&units=imperial&exclude=minutely&APPID=08741ea66d7d6792d95ff754f4184d75';
+    // LH: 34.6599, -118.3690
+    // LA: 34.0522, -118.2437
+    temp = 'https://api.openweathermap.org/data/2.5/onecall?lat=34.0522&lon=-118.2437&units=imperial&exclude=minutely,hourly&APPID=08741ea66d7d6792d95ff754f4184d75';
 
     /**
      * Constructor
@@ -44,7 +45,6 @@ class Weather {
     constructor() {
         this.theme = new Theme();
         this.icons = new Icons();
-        this.moon  = new Moon();
 
         this.getWeather();
     }
@@ -74,12 +74,12 @@ class Weather {
         const set  = this.parseDate(this.weather.current.sunset);
         const mnr  = this.parseDate(this.weather.daily[0].moonrise);
         const mns  = this.parseDate(this.weather.daily[0].moonset);
-        const moon = this.moon.phase(this.weather.daily[0].moon_phase);
+        const moon = this.icons.moon(this.weather.daily[0].moon_phase);
         const tod  = ((now >= rise) && (now <= set)) ? 'day' : 'night';
 
         document.getElementById('current_dtg').innerText  = this.formatDate(now);
         document.getElementById('current_temp').innerHTML = this.formatTemp(this.weather.current.temp);
-        document.getElementById('current_icon').innerHTML = this.icons.fetch(desc, tod);
+        document.getElementById('current_icon').innerHTML = this.icons.weather(desc, tod);
         document.getElementById('current_main').innerText = main;
         document.getElementById('current_desc').innerText = desc;
 
@@ -87,10 +87,10 @@ class Weather {
         document.getElementById('current_wind').innerText       = this.weather.current.wind_speed + 'mph';
         document.getElementById('current_clouds').innerText     = this.weather.current.clouds + '%';
         document.getElementById('current_humidity').innerText   = this.weather.current.humidity + '%';
-        document.getElementById('current_pressure').innerText   = this.weather.current.pressure + 'mb';
+        //document.getElementById('current_pressure').innerText   = this.weather.current.pressure + 'mb';
         document.getElementById('current_visibility').innerText = this.formatNumber(this.weather.current.visibility) + 'ft';
         document.getElementById('current_uvi').innerText        = this.weather.current.uvi;
-        document.getElementById('current_dew').innerHTML        = this.formatTemp(this.weather.current.dew_point);
+        //document.getElementById('current_dew').innerHTML        = this.formatTemp(this.weather.current.dew_point);
         document.getElementById('current_sunrise').innerText    = this.formatTime(rise);
         document.getElementById('current_sunset').innerText     = this.formatTime(set);
         document.getElementById('current_moonrise').innerText   = this.formatTime(mnr);
@@ -107,7 +107,7 @@ class Weather {
             const set  = this.parseDate(this.weather.daily[i].sunset);
             const mnr  = this.parseDate(this.weather.daily[i].moonrise);
             const mns  = this.parseDate(this.weather.daily[i].moonset);
-            const moon = this.moon.phase(this.weather.daily[i].moon_phase);
+            const moon = this.icons.moon(this.weather.daily[i].moon_phase);
 
             const container = document.createElement('div');
             container.classList.add('container');
@@ -122,39 +122,44 @@ class Weather {
             timestamp.innerText = this.formatDate(now);
             container.appendChild(timestamp);
 
+            const mainIcon = document.createElement('div');
+            mainIcon.classList.add('forecast_icon');
+            mainIcon.innerHTML = this.icons.weather(this.weather.daily[i].weather[0].description, 'day');
+            container.appendChild(mainIcon);
+
             const tempLow = document.createElement('div');
             tempLow.classList.add('forecast_low');
-            tempLow.innerHTML = this.formatTemp(this.weather.daily[i].temp.min);
+            tempLow.innerHTML = this.icons.fetch('tempLow') + this.formatTemp(this.weather.daily[i].temp.min);
             container.appendChild(tempLow);
 
             const tempHigh = document.createElement('div');
             tempHigh.classList.add('forecast_high');
-            tempHigh.innerHTML = this.formatTemp(this.weather.daily[i].temp.max);
+            tempHigh.innerHTML = this.icons.fetch('tempHigh') + this.formatTemp(this.weather.daily[i].temp.max);
             container.appendChild(tempHigh);
 
             const sunrise = document.createElement('div');
             sunrise.classList.add('forecast_sunrise');
-            sunrise.innerText = this.formatTime(rise);
+            sunrise.innerHTML = this.icons.fetch('sunrise') + this.formatTime(rise);
             container.appendChild(sunrise);
 
             const sunset = document.createElement('div');
             sunset.classList.add('forecast_sunset');
-            sunset.innerText = this.formatTime(set);
+            sunset.innerHTML = this.icons.fetch('sunset') + this.formatTime(set);
             container.appendChild(sunset);
 
             const moonrise = document.createElement('div');
             moonrise.classList.add('forecast_moonrise');
-            moonrise.innerText = this.formatTime(mnr);
+            moonrise.innerHTML = this.icons.fetch('moonrise') + this.formatTime(mnr);
             container.appendChild(moonrise);
 
             const moonset = document.createElement('div');
             moonset.classList.add('forecast_moonset');
-            moonset.innerText = this.formatTime(mns);
+            moonset.innerHTML = this.icons.fetch('moonset') + this.formatTime(mns);
             container.appendChild(moonset);
 
             const phase = document.createElement('div');
             phase.classList.add('forecast_phase');
-            phase.innerText = moon.phase;
+            phase.innerHTML = moon.icon + moon.phase;
             container.appendChild(phase);
 
             forecast.appendChild(container);

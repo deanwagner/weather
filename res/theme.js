@@ -61,8 +61,11 @@ class Theme {
             case ((cond === 'clear') && (tod === 'night')):
                 theme = 'clear-night';
                 break;
-            case (cond === 'clouds'):
-                theme = 'clouds';
+            case ((cond === 'clouds') && (tod === 'day')):
+                theme = 'clouds-day';
+                break;
+            case ((cond === 'clouds') && (tod === 'night')):
+                theme = 'clouds-night';
                 break;
             case (cond === 'drizzle'):
                 theme = 'drizzle';
