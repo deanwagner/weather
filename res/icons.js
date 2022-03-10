@@ -113,26 +113,26 @@ class Icons {
                 icon = this.clearNight;
                 break;
 
-            // Cloudy
-            case ((cond === 'few clouds: 11-25%') && (tod === 'day')):
+            // Clouds
+            case ((cond === 'few clouds') && (tod === 'day')):
                 icon = this.partlyDay;
                 break;
-            case ((cond === 'few clouds: 11-25%') && (tod === 'night')):
+            case ((cond === 'few clouds') && (tod === 'night')):
                 icon = this.partlyNight;
                 break;
-            case ((cond === 'scattered clouds: 25-50%') && (tod === 'day')):
+            case ((cond === 'scattered clouds') && (tod === 'day')):
                 icon = this.partlyDay;
                 break;
-            case ((cond === 'scattered clouds: 25-50%') && (tod === 'night')):
+            case ((cond === 'scattered clouds') && (tod === 'night')):
                 icon = this.partlyNight;
                 break;
-            case ((cond === 'broken clouds: 51-84%') && (tod === 'day')):
+            case ((cond === 'broken clouds') && (tod === 'day')):
                 icon = this.partlyDay;
                 break;
-            case ((cond === 'broken clouds: 51-84%') && (tod === 'night')):
+            case ((cond === 'broken clouds') && (tod === 'night')):
                 icon = this.partlyNight;
                 break;
-            case (cond === 'overcast clouds: 85-100%'):
+            case (cond === 'overcast clouds'):
                 icon = this.cloudy;
                 break;
 
