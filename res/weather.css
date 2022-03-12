@@ -592,6 +592,13 @@ footer cite {
     fill: var(--color-item);
 }
 
+#modal_location #location_actions {
+    align-items: stretch;
+    display: flex;
+    justify-content: stretch;
+    gap: 1em;
+}
+
 #modal_location #location_confirm {
     display: none;
 }

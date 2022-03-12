@@ -1,3 +1,20 @@
+"use strict";
+
+/**
+ * Location
+ * @class
+ * @property {object} modal   - Modal Module
+ * @property {object} storage - LocalStorage
+ * @property {string} token   - API App ID
+ * @property {string} limit   - Location Return Limit
+ * @property {string} city    - City Name
+ * @property {string} state   - State Name
+ * @property {string} country - Country Code
+ * @property {string} lat     - Latitude
+ * @property {string} lon     - Longitude
+ * @property {object} default - Default Location
+ * @author Dean Wagner <info@deanwagner.net>
+ */
 class Location {
 
     // Class Properties
@@ -20,12 +37,23 @@ class Location {
         lon     : '-118.2437'
     };
 
+    /**
+     * Constructor
+     * @constructor
+     * @param {object} modal - Modal Module
+     * @param {string} token - API App ID
+     */
     constructor(modal, token) {
+
+        // Class Properties
         this.modal   = modal;
         this.token   = token;
         this.storage = window.localStorage;
 
+        // Load Location
         if (this.storage.hasOwnProperty('weather_location')) {
+
+            // Stored Location
             const stored = JSON.parse(this.storage.getItem('weather_location'));
             this.city    = stored.city;
             this.state   = stored.state;
@@ -33,6 +61,8 @@ class Location {
             this.lat     = stored.lat;
             this.lon     = stored.lon;
         } else {
+
+            // Default Location
             this.city    = this.default.city;
             this.state   = this.default.state;
             this.country = this.default.country;
@@ -48,6 +78,7 @@ class Location {
             document.getElementById('location_country').innerText = this.country;
             document.getElementById('location_lat').innerText     = this.lat;
             document.getElementById('location_lon').innerText     = this.lon;
+            document.getElementById('location_search').innerText  = '';
             this.modal.open('modal_location');
         });
 
@@ -78,7 +109,24 @@ class Location {
         });
 
         // Reset Location
-        //document.getElementById('').addEventListener('click', (e) => {});
+        document.getElementById('location_reset').addEventListener('click', (e) => {
+            e.preventDefault();
+
+            this.city    = this.default.city;
+            this.state   = this.default.state;
+            this.country = this.default.country;
+            this.lat     = this.default.lat;
+            this.lon     = this.default.lon;
+
+            document.getElementById('location_city').innerText    = this.city;
+            document.getElementById('location_state').innerText   = this.state;
+            document.getElementById('location_country').innerText = this.country;
+            document.getElementById('location_lat').innerText     = this.lat;
+            document.getElementById('location_lon').innerText     = this.lon;
+            document.getElementById('location_search').innerText  = '';
+
+            this.storage.removeItem('weather_location');
+        });
 
         // Save Location
         document.getElementById('location_save').addEventListener('click', (e) => {

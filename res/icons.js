@@ -26,6 +26,31 @@
  * @property {string} stormSevere    - SVG Icon
  * @property {string} tornado        - SVG Icon
  * @property {string} wind           - SVG Icon
+ *
+ * @property {string} newMoon        - SVG Icon
+ * @property {string} waxingCrescent - SVG Icon
+ * @property {string} firstQuarter   - SVG Icon
+ * @property {string} waxingGibbous  - SVG Icon
+ * @property {string} fullMoon       - SVG Icon
+ * @property {string} waningGibbous  - SVG Icon
+ * @property {string} thirdQuarter   - SVG Icon
+ * @property {string} waningCrescent - SVG Icon
+ *
+ * @property {string} feelsLike      - SVG Icon
+ * @property {string} windSpeed      - SVG Icon
+ * @property {string} cloudCover     - SVG Icon
+ * @property {string} humidity       - SVG Icon
+ * @property {string} pressure       - SVG Icon
+ * @property {string} visibility     - SVG Icon
+ * @property {string} uvIndex        - SVG Icon
+ * @property {string} dewPoint       - SVG Icon
+ * @property {string} sunrise        - SVG Icon
+ * @property {string} sunset         - SVG Icon
+ * @property {string} moonrise       - SVG Icon
+ * @property {string} moonset        - SVG Icon
+ * @property {string} tempHigh       - SVG Icon
+ * @property {string} tempLow        - SVG Icon
+ * @property {array}  phases         - Moon Phase Names
  * @author Dean Wagner <info@deanwagner.net>
  */
 class Icons {

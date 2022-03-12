@@ -1,3 +1,16 @@
+"use strict";
+
+/**
+ * Settings
+ * @class
+ * @property {string} time    - 12hr|24hr
+ * @property {string} unit    - imperial|metric|standard
+ * @property {string} theme   - Empty=Auto|Theme
+ * @property {object} modal   - Modal Module
+ * @property {string} storage - LocalStorage
+ * @property {string} default - Default Settings
+ * @author Dean Wagner <info@deanwagner.net>
+ */
 class Settings {
 
     // Class Properties
@@ -14,6 +27,11 @@ class Settings {
         theme : ''
     }
 
+    /**
+     * Constructor
+     * @constructor
+     * @param {object} modal - Modal Module
+     */
     constructor(modal) {
 
         // Class Properties

@@ -2,6 +2,13 @@
 
 import Themes from './themes.js';
 
+/**
+ * Theme
+ * @class
+ * @property {string} default - Default Theme
+ * @property {array}  styles  - CSS Style Properties
+ * @author Dean Wagner <info@deanwagner.net>
+ */
 class Theme {
 
     default = 'clouds-day';
@@ -13,6 +20,10 @@ class Theme {
         'shadow'
     ];
 
+    /**
+     * Constructor
+     * @constructor
+     */
     constructor() {
         // Change Theme in Settings
         document.getElementById('user_theme').addEventListener('input', (e) => {
@@ -24,9 +35,16 @@ class Theme {
         });
     }
 
+    /**
+     * Load Theme
+     * @param {string} name - Theme Name
+     */
     loadTheme(name) {
+
+        // Get Theme
         const theme = Themes.find(thm => thm.name === name);
 
+        // Set CSS Style Properties
         this.styles.forEach(style => {
             this.setStyleProperty(style, theme[style]);
         });
@@ -41,21 +59,34 @@ class Theme {
             container[i].style.backgroundColor = `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha})`;
         }
 
+        // Insert Photo Credits
         const cite = document.getElementsByTagName('cite')[0];
         cite.innerHTML = `Photo by <a href="${theme.profile}" rel="external" target="_blank">${theme.credit}</a> from <a href="${theme.link}" rel="external" target="_blank">${theme.site}</a>`;
 
+        // Hide Loading Screen
         if (document.body.classList.contains('loading')) {
             document.getElementById('loading').style.display = 'none';
             document.body.classList.remove('loading');
         }
     }
 
-    setTheme(str, tod) {
-        const name = this.getTheme(str, tod);
+    /**
+     * Set Theme
+     * @param {string} cond - Weather Conditions
+     * @param {string} tod - Time of Day (day|night)
+     */
+    setTheme(cond, tod) {
+        const name = this.getTheme(cond, tod);
         this.default = name;
         this.loadTheme(name);
     }
 
+    /**
+     * Get Theme
+     * @param {string} cond - Weather Conditions
+     * @param {string} tod - Time of Day (day|night)
+     * @returns {string}
+     */
     getTheme(cond, tod) {
         let theme;
         cond = cond.toLowerCase();
@@ -96,6 +127,11 @@ class Theme {
         return theme;
     }
 
+    /**
+     * Hex to RGB
+     * @param {string} hex - Hex Color Code
+     * @returns {object|null} - RGB Object | Null
+     */
     hexToRgb(hex) {
         const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
         return result ? {
