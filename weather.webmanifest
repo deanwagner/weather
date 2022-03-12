@@ -1,0 +1,28 @@
+{
+    "name"        : "Weather",
+    "short_name"  : "Weather",
+    "description" : "Local Weather Conditions and 7 Day Forecast",
+    "icons"       : [{
+        "src"   : "img/weather.svg",
+        "type"  : "image/svg+xml",
+        "sizes" : "any"
+    }, {
+        "src"   : "img/weather-192.png",
+        "type"  : "image/png",
+        "sizes" : "192x192"
+    }, {
+        "src"   : "img/weather-512.png",
+        "type"  : "image/png",
+        "sizes" : "512x512"
+    }],
+    "start_url"        : "index.html",
+    "background_color" : "#666666",
+    "theme_color"      : "#333333",
+    "display"          : "standalone",
+    "scope"            : "/weather/",
+    "screenshots"      : [{
+        "src"   : "img/weather-screenshot.png",
+        "type"  : "image/png",
+        "sizes" : "650x365"
+    }]
+}

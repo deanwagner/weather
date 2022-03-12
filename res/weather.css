@@ -266,7 +266,11 @@ header #actions a:active svg path {
 \* * * * * * * * */
 
 main {
+    align-items: center;
+    display: flex;
     flex: 1;
+    flex-direction: column;
+    justify-content: space-evenly;
     width: 100%;
 }
 
@@ -275,13 +279,13 @@ main {
 \* * * * * * * * */
 
 section {
-
+    display: block;
+    width: 100%;
 }
 
 main #current {
     align-items: stretch;
     display: flex;
-    flex: 1;
     gap: 1em;
     justify-content: space-evenly;
     padding: 0 2em;
@@ -386,7 +390,6 @@ main #current #sub_cond .current_data {
 
 main #forecast {
     display: grid;
-    flex: 1;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: 1fr;
     grid-column-gap: 1em;
