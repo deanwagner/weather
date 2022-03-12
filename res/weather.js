@@ -134,10 +134,10 @@ class Weather {
 
         current.appendChild(mainCond);
 
-        subCond.innerHTML  = this.buildSub('current_wind',       'windSpeed',  'Wind Speed', this.weather.current.wind_speed + 'mph');
+        subCond.innerHTML  = this.buildSub('current_wind',       'windSpeed',  'Wind Speed', this.weather.current.wind_speed + ((this.settings.unit === 'imperial') ? 'mph' : 'kph'));
         subCond.innerHTML += this.buildSub('current_clouds',     'cloudCover', 'Clouds',     this.weather.current.clouds + '%');
         subCond.innerHTML += this.buildSub('current_humidity',   'humidity',   'Humidity',   this.weather.current.humidity + '%');
-        subCond.innerHTML += this.buildSub('current_visibility', 'visibility', 'Visibility', this.formatNumber(this.weather.current.visibility) + 'ft');
+        subCond.innerHTML += this.buildSub('current_visibility', 'visibility', 'Visibility', this.formatNumber(this.weather.current.visibility) + ((this.settings.unit === 'imperial') ? 'ft' : 'm'));
         subCond.innerHTML += this.buildSub('current_uvi',        'uvIndex',    'UV Index',   this.weather.current.uvi);
         subCond.innerHTML += this.buildSub('current_sunrise',    'sunrise',    'Sunrise',    this.formatTime(rise));
         subCond.innerHTML += this.buildSub('current_sunset',     'sunset',     'Sunset',     this.formatTime(set));
