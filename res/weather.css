@@ -1,5 +1,5 @@
 /* Import Assets */
-/* @import ''; */
+@import './modal/modal.css';
 
 /* * * * * * * * * * * *\
  *      Weather        *
@@ -22,7 +22,7 @@
 
     /* Shadow/Glow */
     --shadow-box   : 0 0 1rem;
-    --shadow-title : 0.15rem 0.15rem 0;
+    --shadow-title : 0.15rem 0.15rem 0.01rem;
     --shadow-link  : 0.1rem 0.1rem 0.1rem;
     --shadow-text  : 0.05rem 0.05rem 0.2rem;
     --glow-box     : 0 0 0.3rem;
@@ -40,9 +40,6 @@
     /* Transitions */
     --transition-all : all 0.2s ease-out;
     --enable-all     : none;
-
-    /* Flags changed in Media Queries */
-    --mobile-view: 0;
 
     /* Browser Theme */
     color-scheme: light;
@@ -78,6 +75,7 @@ body {
     justify-content: stretch;
     margin: 0;
     min-height: 100vh;
+    min-width: 380px;
     padding: 0;
     text-shadow: var(--shadow-text) var(--color-shadow);
 }
@@ -103,6 +101,66 @@ a:hover, a:focus, a:active {
     color: var(--color-title);
     text-decoration: underline;
     text-shadow: var(--glow-text) var(--color-title);
+}
+
+input[type='text'], input[type='number'] {
+    cursor: text;
+}
+
+button, button *,
+select, select * {
+    cursor: pointer;
+}
+
+button {
+    background-color: var(--color-accent);
+}
+
+select {
+    background-color: var(--color-text);
+}
+
+button, select {
+    border: var(--border-solid) var(--color-shadow);
+    border-radius: 0.5em;
+    box-shadow: var(--shadow-text) var(--color-shadow);
+    color: var(--color-item);
+    font-size: 1rem;
+    padding: 0.7em 1em;
+    text-shadow: var(--shadow-text) var(--color-shadow);
+}
+
+button:hover, button:focus, button:active,
+select:hover, select:focus, select:active {
+    background-color: var(--color-text);
+    box-shadow: var(--glow-text) var(--color-text);
+    text-shadow: var(--glow-box) var(--color-item);
+}
+
+button:focus, select:focus {
+    outline: var(--outline-solid) var(--color-text);
+}
+
+select option {
+    appearance: none;
+    background-color: var(--color-text);
+    color: var(--color-item);
+    cursor: pointer;
+    padding: 1em;
+    text-shadow: var(--shadow-text) var(--color-shadow);
+}
+
+select option:hover,
+select option:focus,
+select option:active,
+select option:checked {
+    background-color: var(--color-item);
+    color: var(--color-text);
+    text-shadow: var(--glow-text) var(--color-text);
+}
+
+label {
+    line-height: 2.5em;
 }
 
 svg {
@@ -145,6 +203,11 @@ h3 {
     border-radius: 0.5em;
     box-shadow: var(--shadow-box) var(--color-shadow);
     padding: 1em;
+    transition: var(--transition-all);
+}
+
+.container * {
+    transition: var(--transition-all);
 }
 
 /* * * * * * * * *\
@@ -160,11 +223,40 @@ header {
 }
 
 header > svg {
+    filter: drop-shadow(var(--shadow-title) var(--color-shadow));
     height: 2.5em;
     width: 2.5em;
 }
 
 header > svg path {
+    fill: var(--color-title);
+}
+
+header #actions a:last-child {
+    margin-left: 0.5em;
+}
+
+header #actions svg {
+    filter: drop-shadow(var(--shadow-text) var(--color-shadow));
+    height: 2.3em;
+    transition: var(--transition-all);
+    width: 2.3em;
+}
+
+header #actions svg path {
+    fill: var(--color-accent);
+}
+
+header #actions a:hover svg,
+header #actions a:focus svg,
+header #actions a:active svg {
+    filter: drop-shadow(var(--glow-box) var(--color-title));
+    transform: rotate(360deg) scale(1.5);
+}
+
+header #actions a:hover svg path,
+header #actions a:focus svg path,
+header #actions a:active svg path {
     fill: var(--color-title);
 }
 
@@ -202,6 +294,20 @@ main #current #main_cond {
 
 }
 
+main #current #main_cond #current_info {
+    align-items: center;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+main #current #main_cond #current_dtg {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 0.5em 0;
+    text-align: center;
+    text-shadow: var(--shadow-title) var(--color-shadow);
+}
+
 main #current #main_cond #current_temp {
     font-size: 5em;
     text-align: center;
@@ -227,6 +333,31 @@ main #current #main_cond #current_desc {
     font-size: 1.8em;
     text-align: center;
     text-transform: capitalize;
+}
+
+main #current #main_cond #current_sum {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 1em;
+    grid-row-gap: 1em;
+    margin: 1em 0 0;
+}
+
+main #current #main_cond #current_sum svg {
+    height: 2rem;
+    margin: 0;
+    width: 2rem;
+}
+
+main #current #main_cond #current_sum > div {
+    font-size: 3em;
+    text-align: center;
+}
+
+main #current #main_cond #current_sum > div > div {
+    color: var(--color-title);
+    font-size: 1rem;
 }
 
 main #current #sub_cond {
@@ -259,21 +390,40 @@ main #forecast {
     grid-template-rows: 1fr;
     grid-column-gap: 1em;
     grid-row-gap: 1em;
-    padding: 2em;
+    padding: 1em 2em;
 }
 
 main #forecast > div > div {
-    padding-bottom: 0.5em;
     white-space: nowrap;
 }
 
-main #forecast > div > div:last-child {
-    padding-bottom: 0;
+main #forecast .forecast_main {
+    font-weight: bold;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+main #forecast .forecast_desc {
+    text-align: center;
+    text-transform: capitalize;
+}
+
+main #forecast .forecast_sum {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(6, auto);
+    grid-column-gap: 0.3em;
+    grid-row-gap: 0.3em;
+    margin: 1em 0 -0.5em;
+}
+
+main #forecast .forecast_label {
+    color: var(--color-title);
 }
 
 main #forecast svg {
     height: 1em;
-    margin-right: 0.5em;
+    margin-right: 0.2em;
     width: 1em;
 }
 
@@ -294,7 +444,7 @@ main #forecast .forecast_icon svg {
 footer {
     align-items: flex-start;
     display: flex;
-    font-size: 0.8em;
+    font-size: 0.7em;
     justify-content: space-between;
     padding: 0.5em;
     width: 100%;
@@ -305,40 +455,8 @@ footer cite {
 }
 
 /* * * * * * * * *\
- *  GitHub Icon  *
-\* * * * * * * * */
-
-.github-link svg {
-    filter: drop-shadow(var(--shadow-text) var(--color-shadow));
-    height: 2.3em;
-    transition: var(--transition-all);
-    width: 2.3em;
-}
-
-.github-link svg path {
-    fill: var(--color-accent);
-}
-
-.github-link:hover svg,
-.github-link:focus svg,
-.github-link:active svg {
-    filter: drop-shadow(var(--glow-box) var(--color-title));
-    transform: rotate(360deg) scale(1.5);
-}
-
-.github-link:hover svg path,
-.github-link:focus svg path,
-.github-link:active svg path {
-    fill: var(--color-title);
-}
-
-/* * * * * * * * *\
  *    Modals     *
 \* * * * * * * * */
-
-#modal, #modal > div {
-    display: none;
-}
 
 #modal > div {
     background-color: var(--color-item);
@@ -346,8 +464,18 @@ footer cite {
     padding: 2em;
 }
 
+#modal .close_modal {
+    right: 1.5em;
+    top: 0.5em;
+}
+
+#modal .close_modal svg {
+    height: 2em;
+    width: 2em;
+}
+
 #modal div h3 {
-    font-size: 1.4rem;
+    font-size: 2rem;
     font-weight: normal;
     margin: 0 0 1em;
     text-align: center;
@@ -367,6 +495,134 @@ footer cite {
 
 #modal .close_modal:hover svg path {
     fill: var(--color-title);
+}
+
+/* * * * * * * * *\
+ *   Settings    *
+\* * * * * * * * */
+
+#modal_settings form {
+    display: grid;
+    grid-gap: 1em;
+    grid-template-columns: 1fr 1fr;
+}
+
+#modal_settings form label {
+    font-size: 1.4em;
+}
+
+/* * * * * * * * *\
+ *   Location    *
+\* * * * * * * * */
+
+#modal_location #location_set button {
+    display: block;
+    width: 100%;
+}
+
+#modal_location #location_info {
+    display: grid;
+    grid-gap: 0.5em;
+    grid-template-columns: 1fr 1fr;
+    margin: 0 0 1em;
+}
+
+#modal_location .location_label {
+    color: var(--color-title);
+}
+
+#modal_location #location_api {
+    text-align: center;
+}
+
+#modal_location #location_api span {
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
+#modal_location #location_set form {
+    align-items: center;
+    background-color: var(--color-text);
+    border: var(--border-solid) var(--color-shadow);
+    border-radius: 0.5em;
+    box-shadow: inset var(--shadow-text) var(--color-shadow);
+    display: flex;
+    justify-content: stretch;
+    margin: 1em 0;
+}
+
+#modal_location #location_set form label {
+    display: none;
+}
+
+#modal_location #location_set form input {
+    background-color: transparent;
+    border: none;
+    border-radius: 0.5em;
+    box-shadow: none;
+    color: var(--color-item);
+    cursor: text;
+    flex: 1;
+    font-family: var(--font-mono);
+    padding: 1em 0 1em 1em;
+}
+
+#modal_location #location_set form button,
+#modal_location #location_set form button:hover {
+    background-color: transparent;
+    border: none;
+    border-radius: 0.5em;
+    box-shadow: none;
+    height: 2em;
+    margin: 0;
+    padding: 0.5em;
+    width: 2em;
+}
+
+#modal_location #location_set form svg {
+    height: 1em;
+    width: 1em;
+}
+
+#modal_location #location_set form svg path {
+    fill: var(--color-item);
+}
+
+#modal_location #location_confirm {
+    display: none;
+}
+
+/* * * * * * * * *\
+ *  Scrollbars   *
+\* * * * * * * * */
+
+body * {
+    scrollbar-color: var(--color-item) transparent;
+}
+
+body *::-webkit-scrollbar {
+    width: auto;
+    height: auto;
+}
+
+body *::-webkit-scrollbar-thumb {
+    background-color: var(--color-item);
+    background-clip: padding-box;
+    border: 1px solid var(--color-shadow);
+    border-radius: 5px;
+    box-shadow: var(--shadow-box) var(--color-shadow);
+    cursor: grab;
+}
+
+body *::-webkit-scrollbar-button,
+body *::-webkit-scrollbar-corner,
+body *::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+body *::-webkit-scrollbar-thumb:hover,
+body *::-webkit-scrollbar-thumb:active {
+    background-color: var(--color-accent);
 }
 
 /* * * * * * * * *\
@@ -450,16 +706,20 @@ footer cite {
  * Media Queries *
 \* * * * * * * * */
 
+@media screen and (max-width: 1625px) {
+    main #forecast { overflow-x: auto; }
+}
+
 @media screen and (max-width: 1350px) {
-    main #forecast { grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 1fr); }
+    main #current { justify-content: stretch; width: 100%; }
+    main #current > div { flex: 1; min-width: auto; }
 }
 
 @media screen and (orientation: portrait) {
-    :root { --mobile-view: 1; }
     body { font-size: 10pt; }
-    main #current { flex-direction: column; justify-content: stretch; width: 100%; }
+    main #current { flex-direction: column; justify-content: stretch; padding: 1em 1em 0; width: 100%; }
     main #current > div { flex: 1; min-width: auto; }
-    main #forecast { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(4, 1fr); }
+    main #forecast { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(4, 1fr); padding: 1em; }
 }
 
 @media (prefers-color-scheme: dark) {

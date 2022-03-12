@@ -14,7 +14,7 @@ export default
       shadow  : '#0A3670'
 }, {
       name    : 'clear-night',
-      image   : 'clear-night.webp',
+      image   : 'clear-night2.webp',
       place   : 'bottom center',
       credit  : 'Jeremy Thomas',
       profile : 'https://unsplash.com/@jeremythomasphoto',
@@ -47,8 +47,8 @@ export default
       site    : 'Unsplash',
       link    : 'https://unsplash.com/photos/h_gwdi8UH2o',
       text    : '#F1EEE4',
-      title   : '#A8AB9C',
-      accent  : '#B7A07B',
+      title   : '#B7A07B',
+      accent  : '#A8AB9C',
       item    : '#3B413A',
       shadow  : '#141414'
 }, {
@@ -60,8 +60,8 @@ export default
       site    : 'Unsplash',
       link    : 'https://unsplash.com/photos/VR0s3Yqm2RA',
       text    : '#FCFBFB',
-      title   : '#B8CBF4',
-      accent  : '#ECDACA',
+      title   : '#ECDACA',
+      accent  : '#B8CBF4',
       item    : '#865E48',
       shadow  : '#1F303A'
 }, {
@@ -73,8 +73,8 @@ export default
       site    : 'Unsplash',
       link    : 'https://unsplash.com/photos/tFLp4a_7aP0',
       text    : '#F6F8F7',
-      title   : '#FCF2AE',
-      accent  : '#8DDDE2',
+      title   : '#8DDDE2',
+      accent  : '#FCF2AE',
       item    : '#45595F',
       shadow  : '#313031'
 }, {
@@ -86,8 +86,8 @@ export default
       site    : 'Pexels',
       link    : 'https://www.pexels.com/photo/scenic-view-of-a-lightning-in-the-sky-4124167/',
       text    : '#FBFAF9',
-      title   : '#C08ED7',
-      accent  : '#E77EA2',
+      title   : '#E77EA2',
+      accent  : '#C08ED7',
       item    : '#152668',
       shadow  : '#191945'
 }, {
@@ -125,8 +125,8 @@ export default
       site    : 'Unsplash',
       link    : 'https://unsplash.com/photos/iGDg_f_mlWo',
       text    : '#FAF9F7',
-      title   : '#E6D0C0',
-      accent  : '#8BB2BB',
+      title   : '#8BB2BB',
+      accent  : '#E6D0C0',
       item    : '#533D3C',
       shadow  : '#221C1C'
 }]

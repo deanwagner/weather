@@ -1,8 +1,11 @@
 "use strict";
 
 // Import Modules
-import Theme from './theme.js';
-import Icons from './icons.js';
+import Theme    from './theme.js';
+import Icons    from './icons.js';
+import Settings from './settings.js';
+import Location from './location.js';
+import Modal    from './modal/modal.js';
 
 /**
  * Weather
@@ -15,13 +18,9 @@ class Weather {
     theme    = {};
     icons    = {};
     weather  = {};
-    moon     = {};
-
-    // User Settings
-    settings = {
-        time : '12hr',
-        unit : 'Imperial'
-    };
+    modal    = {};
+    exclude  = 'minutely,hourly';
+    token    = '08741ea66d7d6792d95ff754f4184d75';
 
     // Weekdays
     weekdays = [
@@ -34,20 +33,32 @@ class Weather {
         'Saturday'
     ];
 
-    // LH: 34.6599, -118.3690
-    // LA: 34.0522, -118.2437
-    temp = 'https://api.openweathermap.org/data/2.5/onecall?lat=34.0522&lon=-118.2437&units=imperial&exclude=minutely,hourly&APPID=08741ea66d7d6792d95ff754f4184d75';
-    city = 'Los Angeles';
-    state = 'California';
-    country = 'US';
+    // Months
+    months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+    ];
 
     /**
      * Constructor
      * @constructor
      */
     constructor() {
-        this.theme = new Theme();
-        this.icons = new Icons();
+        this.modal    = new Modal();
+        this.location = new Location(this.modal, this.token);
+        this.settings = new Settings(this.modal);
+        this.theme    = new Theme();
+        this.icons    = new Icons();
 
         this.getWeather();
     }
@@ -56,10 +67,23 @@ class Weather {
      * Loads Default Books from JSON
      */
     getWeather() {
-        fetch(this.temp)
+        let url = 'https://api.openweathermap.org/data/2.5/onecall?';
+        url += 'lat=' + this.location.lat;
+        url += '&lon=' + this.location.lon;
+
+        if (this.settings.unit !== 'standard') {
+            url += '&units=' + this.settings.unit;
+        }
+
+        if (this.exclude !== '') {
+            url += '&exclude=' + this.exclude;
+        }
+
+        url += '&APPID=' + this.token;
+
+        fetch(url)
             .then(response => response.json())
             .then(json => {
-                // Load Books into Library
                 this.loadWeather(json);
             });
     }
@@ -79,41 +103,60 @@ class Weather {
         const mns  = this.parseDate(this.weather.daily[0].moonset);
         const moon = this.icons.moon(this.weather.daily[0].moon_phase);
         const tod  = ((now >= rise) && (now <= set)) ? 'day' : 'night';
+        const date = new Date();
+        const full = this.weekdays[date.getDay()] + ', ' + this.months[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
 
-        const mainCond = document.getElementById('main_cond');
-        const sunCond  = document.getElementById('sub_cond');
+        const current  = document.getElementById('current');
         const forecast = document.getElementById('forecast');
+        const mainCond = document.createElement('div');
+        const subCond  = document.createElement('div');
 
-        mainCond.innerHTML  = `<h2>${this.city}</h2>`;
-        mainCond.innerHTML += this.buildMain('current_state', `${this.state}, ${this.country}`);
-        mainCond.innerHTML += this.buildMain('current_dtg',   this.formatDate(now));
-        mainCond.innerHTML += this.buildMain('current_temp',  this.formatTemp(this.weather.current.temp));
-        mainCond.innerHTML += this.buildMain('current_icon',  this.icons.weather(desc, tod));
-        mainCond.innerHTML += this.buildMain('current_main',  main);
-        mainCond.innerHTML += this.buildMain('current_desc',  desc);
-        //document.getElementById('current_like').innerHTML       = this.formatTemp(this.weather.current.feels_like);
+        mainCond.setAttribute('id','main_cond');
+        mainCond.classList.add('container');
+        subCond.setAttribute('id','sub_cond');
+        subCond.classList.add('container');
 
-        sunCond.innerHTML  = this.buildSub('current_wind',       'windSpeed',  'Wind Speed', this.weather.current.wind_speed + 'mph');
-        sunCond.innerHTML += this.buildSub('current_clouds',     'cloudCover', 'Clouds',     this.weather.current.clouds + '%');
-        sunCond.innerHTML += this.buildSub('current_humidity',   'humidity',   'Humidity',   this.weather.current.humidity + '%');
-        sunCond.innerHTML += this.buildSub('current_visibility', 'visibility', 'Visibility', this.formatNumber(this.weather.current.visibility) + 'ft');
-        sunCond.innerHTML += this.buildSub('current_uvi',        'uvIndex',    'UV Index',   this.weather.current.uvi);
-        sunCond.innerHTML += this.buildSub('current_sunrise',    'sunrise',    'Sunrise',    this.formatTime(rise));
-        sunCond.innerHTML += this.buildSub('current_sunset',     'sunset',     'Sunset',     this.formatTime(set));
-        sunCond.innerHTML += this.buildSub('current_moonrise',   'moonrise',   'Moonrise',   this.formatTime(mnr));
-        sunCond.innerHTML += this.buildSub('current_moonset',    'moonset',    'Moonset',    this.formatTime(mns));
-        sunCond.innerHTML += this.buildSub('current_moonset',    'moonset',    'Moonset',    this.formatTime(mns));
-        sunCond.innerHTML += moon.icon;
-        sunCond.innerHTML += '<span class="current_label">Moon Phase:</span>';
-        sunCond.innerHTML += `<span id="current_phase" class="current_data">${moon.phase}</span>`;
+        mainCond.innerHTML  = `
+            <h2>${this.location.city}</h2>
+            <div id="current_state">${this.location.state}, ${this.location.country}</div>
+            <div id="current_dtg">${full}</div>
+            <div id="current_info">
+                <div id="current_icon">${this.icons.weather(desc, tod)}</div>
+                <div id="current_temp">${this.formatTemp(this.weather.current.temp)}</div>
+            </div>
+            <div id="current_main">${main}</div>
+            <div id="current_desc">${desc}</div>
+            <div id="current_sum">
+                <div id="current_like"><div>Feels Like</div>${this.formatTemp(this.weather.current.feels_like)}</div>
+                <div id="current_high"><div>High</div>${this.formatTemp(this.weather.daily[0].temp.max)}</div>
+                <div id="current_low"><div>Low</div>${this.formatTemp(this.weather.daily[0].temp.min)}</div>
+            </div>`;
+
+        current.appendChild(mainCond);
+
+        subCond.innerHTML  = this.buildSub('current_wind',       'windSpeed',  'Wind Speed', this.weather.current.wind_speed + 'mph');
+        subCond.innerHTML += this.buildSub('current_clouds',     'cloudCover', 'Clouds',     this.weather.current.clouds + '%');
+        subCond.innerHTML += this.buildSub('current_humidity',   'humidity',   'Humidity',   this.weather.current.humidity + '%');
+        subCond.innerHTML += this.buildSub('current_visibility', 'visibility', 'Visibility', this.formatNumber(this.weather.current.visibility) + 'ft');
+        subCond.innerHTML += this.buildSub('current_uvi',        'uvIndex',    'UV Index',   this.weather.current.uvi);
+        subCond.innerHTML += this.buildSub('current_sunrise',    'sunrise',    'Sunrise',    this.formatTime(rise));
+        subCond.innerHTML += this.buildSub('current_sunset',     'sunset',     'Sunset',     this.formatTime(set));
+        subCond.innerHTML += this.buildSub('current_moonrise',   'moonrise',   'Moonrise',   this.formatTime(mnr));
+        subCond.innerHTML += this.buildSub('current_moonset',    'moonset',    'Moonset',    this.formatTime(mns));
+        subCond.innerHTML += moon.icon;
+        subCond.innerHTML += '<span class="current_label">Moon Phase:</span>';
+        subCond.innerHTML += `<span id="current_phase" class="current_data">${moon.phase}</span>`;
+
+        current.appendChild(subCond);
 
         //document.getElementById('current_pressure').innerText   = this.weather.current.pressure + 'mb';
         //document.getElementById('current_dew').innerHTML        = this.formatTemp(this.weather.current.dew_point);
 
-
         for (let i = 1; i < this.weather.daily.length; i++) {
             const now  = this.parseDate(this.weather.daily[i].dt);
             const dtg  = new Date(now);
+            const main = this.weather.daily[i].weather[0].main;
+            const desc = this.weather.daily[i].weather[0].description;
             const rise = this.parseDate(this.weather.daily[i].sunrise);
             const set  = this.parseDate(this.weather.daily[i].sunset);
             const mnr  = this.parseDate(this.weather.daily[i].moonrise);
@@ -126,22 +169,26 @@ class Weather {
             container.innerHTML  = '<div class="forecast_weekday"><h3>' + this.weekdays[dtg.getDay()] + '</h3></div>';
             container.innerHTML += '<div class="forecast_date">' + this.formatDate(now) + '</div>';
             container.innerHTML += '<div class="forecast_icon">' + this.icons.weather(this.weather.daily[i].weather[0].description, 'day') + '</div>';
-            container.innerHTML += this.buildDay('forecast_low', 'tempLow', '<span class="day_label">Low:</span> ' + this.formatTemp(this.weather.daily[i].temp.min));
-            container.innerHTML += this.buildDay('forecast_high', 'tempHigh', '<span class="day_label">High:</span> ' + this.formatTemp(this.weather.daily[i].temp.max));
-            container.innerHTML += this.buildDay('forecast_sunrise', 'sunrise', this.formatTime(rise));
-            container.innerHTML += this.buildDay('forecast_sunset', 'sunset', this.formatTime(set));
-            container.innerHTML += this.buildDay('forecast_moonrise', 'moonrise', this.formatTime(mnr));
-            container.innerHTML += this.buildDay('forecast_moonset', 'moonset', this.formatTime(mns));
+            container.innerHTML += '<div class="forecast_main">' + main + '</div>';
+            container.innerHTML += '<div class="forecast_desc">' + desc + '</div>';
+
+            const daySum = document.createElement('div');
+            daySum.classList.add('forecast_sum');
+
+            daySum.innerHTML += this.buildDay('forecast_high', 'tempHigh', '<span class="forecast_label">High:</span> ' + this.formatTemp(this.weather.daily[i].temp.max));
+            daySum.innerHTML += this.buildDay('forecast_low', 'tempLow', '<span class="forecast_label">Low:</span> ' + this.formatTemp(this.weather.daily[i].temp.min));
+            daySum.innerHTML += this.buildDay('forecast_sunrise', 'sunrise', this.formatTime(rise));
+            daySum.innerHTML += this.buildDay('forecast_sunset', 'sunset', this.formatTime(set));
+            daySum.innerHTML += this.buildDay('forecast_moonrise', 'moonrise', this.formatTime(mnr));
+            daySum.innerHTML += this.buildDay('forecast_moonset', 'moonset', this.formatTime(mns));
+
+            container.appendChild(daySum);
             container.innerHTML += '<div class="forecast_phase">' + moon.icon + moon.phase + '</div>';
 
             forecast.appendChild(container);
         }
 
         this.theme.setTheme(main, tod);
-    }
-
-    buildMain(id, content) {
-        return `<div id="${id}">${content}</div>`;
     }
 
     buildSub(id, icon, label, content) {

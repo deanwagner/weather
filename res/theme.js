@@ -4,7 +4,8 @@ import Themes from './themes.js';
 
 class Theme {
 
-    styles = [
+    default = 'clouds-day';
+    styles  = [
         'text',
         'title',
         'accent',
@@ -13,19 +14,17 @@ class Theme {
     ];
 
     constructor() {
-        //test links
-        const a = document.querySelectorAll('#modal_settings a');
-        for(let i = 0; i < a.length; i++) {
-            a[i].addEventListener('click', (e) => {
-                e.preventDefault();
-                const tod = (e.target.dataset.hasOwnProperty('tod')) ? e.target.dataset.tod : 'day';
-                this.setTheme(e.target.dataset.theme, tod);
-            });
-        }
+        // Change Theme in Settings
+        document.getElementById('user_theme').addEventListener('input', (e) => {
+            if (e.target.value === '') {
+                this.loadTheme(this.default);
+            } else {
+                this.loadTheme(e.target.value);
+            }
+        });
     }
 
-    setTheme(str, tod) {
-        const name  = this.getTheme(str, tod);
+    loadTheme(name) {
         const theme = Themes.find(thm => thm.name === name);
 
         this.styles.forEach(style => {
@@ -35,7 +34,7 @@ class Theme {
         document.body.style.backgroundImage = `url(./img/${theme.image})`;
         document.body.style.backgroundPosition = theme.place;
 
-        const alpha = '0.8';
+        const alpha = '0.9';
         const color = this.hexToRgb(theme.item);
         const container = document.getElementsByClassName('container');
         for(let i = 0; i < container.length; i++) {
@@ -49,6 +48,12 @@ class Theme {
             document.getElementById('loading').style.display = 'none';
             document.body.classList.remove('loading');
         }
+    }
+
+    setTheme(str, tod) {
+        const name = this.getTheme(str, tod);
+        this.default = name;
+        this.loadTheme(name);
     }
 
     getTheme(cond, tod) {
