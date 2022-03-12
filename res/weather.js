@@ -188,7 +188,14 @@ class Weather {
             forecast.appendChild(container);
         }
 
-        this.theme.setTheme(main, tod);
+        // Load Theme
+        if (this.settings.theme !== '') {
+            // User Set Theme
+            this.theme.loadTheme(this.settings.theme);
+        } else {
+            // Auto Load Theme Based on Weather
+            this.theme.setTheme(main, tod);
+        }
     }
 
     buildSub(id, icon, label, content) {

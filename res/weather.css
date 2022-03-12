@@ -108,7 +108,8 @@ input[type='text'], input[type='number'] {
 }
 
 button, button *,
-select, select * {
+select, select *,
+input[type='radio'] {
     cursor: pointer;
 }
 
@@ -515,7 +516,7 @@ footer cite {
  *   Location    *
 \* * * * * * * * */
 
-#modal_location #location_set button {
+#modal_location button {
     display: block;
     width: 100%;
 }
@@ -589,6 +590,30 @@ footer cite {
 }
 
 #modal_location #location_confirm {
+    display: none;
+}
+
+#modal_location #location_confirm fieldset {
+    border: var(--border-solid) var(--color-shadow);
+    border-radius: 0.5em;
+    display: grid;
+    grid-template-columns: 2em 1fr;
+    grid-template-rows: auto;
+    grid-column-gap: 0.3em;
+    grid-row-gap: 0.3em;
+    margin-bottom: 1em;
+}
+
+#modal_location #location_confirm legend {
+    color: var(--color-title);
+}
+
+#modal_location #location_confirm label {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#modal_location #location_error {
     display: none;
 }
 
