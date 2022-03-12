@@ -147,7 +147,7 @@ class Location {
     }
 
     getCoords(query) {
-        let url = 'http://api.openweathermap.org/geo/1.0/direct?';
+        let url = 'https://api.openweathermap.org/geo/1.0/direct?';
         url += 'q=' + query;
         url += '&limit=' + this.limit;
         url += '&appid=' + this.token;
