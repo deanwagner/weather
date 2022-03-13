@@ -627,6 +627,30 @@ footer cite {
     display: none;
 }
 
+#modal_location #location_loading {
+    align-items: center;
+    display: none;
+    justify-content: center;
+
+}
+
+#modal_location #location_loading svg {
+    filter: drop-shadow(var(--shadow-box) var(--color-shadow));
+    height: 5em;
+    width: 5em;
+}
+
+#modal_location #location_loading #loading_ring  {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 4;
+}
+
+#modal_location #location_loading #loading_ball  {
+    fill: var(--color-title);
+    filter: drop-shadow(var(--glow-text) var(--color-title));
+}
+
 /* * * * * * * * *\
  *  Scrollbars   *
 \* * * * * * * * */

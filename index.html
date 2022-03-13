@@ -111,7 +111,6 @@
                         <button id="location_reset" type="button">Reset</button>
                         <button id="location_save" type="button">Save</button>
                     </div>
-
                 </div>
                 <div id="location_confirm">
                     <form>
@@ -122,6 +121,20 @@
                 <div id="location_error">
                     <div id="error_message"></div>
                     <button id="error_cancel" type="button">Cancel</button>
+                </div>
+                <div id="location_loading">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" xml:space="preserve">
+                        <circle id="loading_ring" cx="50" cy="50" r="44"/>
+                        <circle id="loading_ball" cx="8" cy="54" r="6" >
+                            <animateTransform
+                                attributeName="transform"
+                                dur="2s"
+                                type="rotate"
+                                from="0 50 48"
+                                to="360 50 52"
+                                repeatCount="indefinite" />
+                        </circle>
+                    </svg>
                 </div>
             </div>
         </div>

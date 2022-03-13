@@ -77,6 +77,8 @@ class Weather {
      * Loads Default Books from JSON
      */
     getWeather() {
+
+        // Build URL
         let url = 'https://api.openweathermap.org/data/2.5/onecall?';
         url += 'lat=' + this.location.lat;
         url += '&lon=' + this.location.lon;
@@ -91,9 +93,11 @@ class Weather {
 
         url += '&APPID=' + this.token;
 
+        // Fetch Response
         fetch(url)
             .then(response => response.json())
             .then(json => {
+                // Load Weather Data
                 this.loadWeather(json);
             });
     }

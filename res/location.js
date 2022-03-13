@@ -169,10 +169,14 @@ class Location {
 
     getLocation() {
         let url = 'https://api.openweathermap.org/geo/1.0/reverse?';
-        url += 'lat=' + this.lat;
-        url += '&lon=' + this.lon;
+        url += 'lat=' + this.lat.toString();
+        url += '&lon=' + this.lon.toString();
         url += '&limit=1';
         url += '&appid=' + this.token;
+
+        // Loading
+        document.getElementById('location_set').style.display = 'none';
+        document.getElementById('location_loading').style.display = 'flex';
 
         fetch(url)
             .then(response => response.json())
@@ -189,6 +193,9 @@ class Location {
             document.getElementById('location_city').innerText    = this.city;
             document.getElementById('location_state').innerText   = this.state;
             document.getElementById('location_country').innerText = this.country;
+
+            document.getElementById('location_set').style.display = 'block';
+            document.getElementById('location_loading').style.display = 'none';
         } else {
             // No Result
         }
@@ -200,6 +207,10 @@ class Location {
         url += '&limit=' + this.limit;
         url += '&appid=' + this.token;
 
+        // Loading
+        document.getElementById('location_set').style.display = 'none';
+        document.getElementById('location_loading').style.display = 'flex';
+
         fetch(url)
             .then(response => response.json())
             .then(json => {
@@ -208,7 +219,7 @@ class Location {
     }
 
     confirmLocation(json) {
-        const locationSet     = document.getElementById('location_set');
+        const locationSet = document.getElementById('location_set');
 
         if (json.length === 1) {
 
@@ -216,14 +227,18 @@ class Location {
             this.city    = json[0].name;
             this.state   = (json[0].hasOwnProperty('state')) ? json[0].state : '';
             this.country = json[0].country;
-            this.lat     = json[0].lat;
-            this.lon     = json[0].lon;
+            this.lat     = parseFloat(json[0].lat).toFixed(4);
+            this.lon     = parseFloat(json[0].lon).toFixed(4);
 
             document.getElementById('location_city').innerText    = this.city;
             document.getElementById('location_state').innerText   = this.state;
             document.getElementById('location_country').innerText = this.country;
-            document.getElementById('location_lat').innerText     = this.lat;
-            document.getElementById('location_lon').innerText     = this.lon;
+            document.getElementById('location_lat').innerText     = this.lat.toString();
+            document.getElementById('location_lon').innerText     = this.lon.toString();
+
+            // Hide Loading
+            document.getElementById('location_loading').style.display = 'none';
+            document.getElementById('location_set').style.display = 'block';
         } else if (json.length > 1) {
 
             // Multiple Results
@@ -249,13 +264,15 @@ class Location {
                 options.appendChild(label);
             });
 
-            locationSet.style.display = 'none';
+            // Hide Loading
+            document.getElementById('location_loading').style.display = 'none';
             document.getElementById('location_confirm').style.display = 'block';
         } else {
 
             // No Results
             locationSet.style.display = 'none';
             document.getElementById('error_message').innerText = 'There are no matches to your search.';
+            document.getElementById('location_loading').style.display = 'none';
             document.getElementById('location_error').style.display = 'block';
         }
     }
@@ -264,14 +281,14 @@ class Location {
         this.city    = json.name;
         this.state   = (json.hasOwnProperty('state')) ? json.state : '';
         this.country = json.country;
-        this.lat     = json.lat;
-        this.lon     = json.lon;
+        this.lat     = parseFloat(json.lat).toFixed(4);
+        this.lon     = parseFloat(json.lon).toFixed(4);
 
         document.getElementById('location_city').innerText    = this.city;
         document.getElementById('location_state').innerText   = this.state;
         document.getElementById('location_country').innerText = this.country;
-        document.getElementById('location_lat').innerText     = this.lat;
-        document.getElementById('location_lon').innerText     = this.lon;
+        document.getElementById('location_lat').innerText     = this.lat.toString();
+        document.getElementById('location_lon').innerText     = this.lon.toString();
 
         document.getElementById('location_confirm').style.display = 'none';
         document.getElementById('location_set').style.display = 'block';
