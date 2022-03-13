@@ -628,6 +628,10 @@ footer cite {
     display: none;
 }
 
+#modal_location #location_error #error_message {
+    margin-bottom: 1em;
+}
+
 #modal_location #location_loading {
     align-items: center;
     display: none;

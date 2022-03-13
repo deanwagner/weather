@@ -97,8 +97,14 @@ class Location {
                     navigator.geolocation.getCurrentPosition(this.setCCoords.bind(this));
                 } else if (result.state === 'denied') {
                     // Access Denied
+                    document.getElementById('error_message').innerText = 'Access to your location was denied.';
+                    document.getElementById('location_loading').style.display = 'none';
+                    document.getElementById('location_error').style.display = 'block';
                 } else {
                     // Error
+                    document.getElementById('error_message').innerText = 'An unexpected error occurred while attempting to access your location.';
+                    document.getElementById('location_loading').style.display = 'none';
+                    document.getElementById('location_error').style.display = 'block';
                 }
             });
         });
@@ -169,6 +175,13 @@ class Location {
 
             return false;
         });
+
+        // Error Cancel
+        document.getElementById('error_cancel').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('location_error').style.display = 'none';
+            document.getElementById('location_set').style.display = 'block';
+        });
     }
 
     setCCoords(position) {
@@ -206,10 +219,13 @@ class Location {
             document.getElementById('location_state').innerText   = this.state;
             document.getElementById('location_country').innerText = this.country;
 
-            document.getElementById('location_set').style.display = 'block';
             document.getElementById('location_loading').style.display = 'none';
+            document.getElementById('location_set').style.display = 'block';
         } else {
             // No Result
+            document.getElementById('error_message').innerText = 'Your location could not be determined.';
+            document.getElementById('location_loading').style.display = 'none';
+            document.getElementById('location_error').style.display = 'block';
         }
     }
 
