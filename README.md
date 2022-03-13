@@ -1,5 +1,5 @@
 # Weather
-### Local Weather Conditions and Forecast
+### Local Weather Conditions and 7-Day Forecast
 
 Live Demo:  
 https://deanwagner.github.io/weather/
