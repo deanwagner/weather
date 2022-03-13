@@ -17,7 +17,7 @@ This project was created for the [Weather App assignment](https://www.theodinpro
 1. Access OpenWeather API
 2. Process JSON Result
 3. Allow User to Enter Location
-4. (+1) Add "Loading" Component
+4. (+) Add "Loading" Component
 
 ### Scope Creep
 
