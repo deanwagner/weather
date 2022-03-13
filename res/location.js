@@ -85,6 +85,11 @@ class Location {
         // Get Location Button
         document.getElementById('location_get').addEventListener('click', (e) => {
             e.preventDefault();
+
+            // Loading
+            document.getElementById('location_set').style.display = 'none';
+            document.getElementById('location_loading').style.display = 'flex';
+
             navigator.permissions.query({name:'geolocation'}).then(result =>  {
                 if (result.state === 'granted') {
                     navigator.geolocation.getCurrentPosition(this.setCCoords.bind(this));
@@ -141,6 +146,13 @@ class Location {
             }));
 
             location.reload();
+        });
+
+        // Confirm Cancel
+        document.getElementById('confirm_cancel').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('location_confirm').style.display = 'none';
+            document.getElementById('location_set').style.display = 'block';
         });
 
         // Confirm Location

@@ -115,7 +115,10 @@
                 <div id="location_confirm">
                     <form>
                         <fieldset></fieldset>
-                        <button id="confirm_submit" type="submit">Confirm</button>
+                        <div id="confirm_actions">
+                            <button id="confirm_cancel" type="button">Cancel</button>
+                            <button id="confirm_submit" type="submit">Confirm</button>
+                        </div>
                     </form>
                 </div>
                 <div id="location_error">
@@ -135,6 +138,7 @@
                                 repeatCount="indefinite" />
                         </circle>
                     </svg>
+                    <span>Loading</span>
                 </div>
             </div>
         </div>

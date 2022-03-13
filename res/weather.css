@@ -592,7 +592,8 @@ footer cite {
     fill: var(--color-item);
 }
 
-#modal_location #location_actions {
+#modal_location #location_actions,
+#modal_location #confirm_actions {
     align-items: stretch;
     display: flex;
     justify-content: stretch;
@@ -630,6 +631,7 @@ footer cite {
 #modal_location #location_loading {
     align-items: center;
     display: none;
+    flex-direction: column;
     justify-content: center;
 
 }
@@ -637,6 +639,7 @@ footer cite {
 #modal_location #location_loading svg {
     filter: drop-shadow(var(--shadow-box) var(--color-shadow));
     height: 5em;
+    margin-bottom: 1em;
     width: 5em;
 }
 
