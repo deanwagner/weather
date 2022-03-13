@@ -184,6 +184,10 @@ class Location {
         });
     }
 
+    /**
+     * Set Coordinates
+     * @param {object} position - Geolocation API Position Object
+     */
     setCCoords(position) {
         this.lat = position.coords.latitude.toFixed(4);
         this.lon = position.coords.longitude.toFixed(4);
@@ -192,6 +196,9 @@ class Location {
         this.getLocation();
     }
 
+    /**
+     * Get Location from Coordinates
+     */
     getLocation() {
         let url = 'https://api.openweathermap.org/geo/1.0/reverse?';
         url += 'lat=' + this.lat.toString();
@@ -210,6 +217,10 @@ class Location {
             });
     }
 
+    /**
+     * Set Location from JSON
+     * @param {array} json - this.getLocation() Result
+     */
     setLocation(json) {
         if (json.length > 0) {
             this.city    = json[0].name;
@@ -229,6 +240,10 @@ class Location {
         }
     }
 
+    /**
+     * Get Coordinates from Location
+     * @param {string} query - City/State/Country
+     */
     getCoords(query) {
         let url = 'https://api.openweathermap.org/geo/1.0/direct?';
         url += 'q=' + query;
@@ -246,6 +261,10 @@ class Location {
             });
     }
 
+    /**
+     * Confirm Location
+     * @param {array} json - this.getCoords() Result
+     */
     confirmLocation(json) {
         const locationSet = document.getElementById('location_set');
 
@@ -305,6 +324,10 @@ class Location {
         }
     }
 
+    /**
+     * Location Confirmed from Multiple Results
+     * @param {object} json - Location Data
+     */
     locationConfirmed(json) {
         this.city    = json.name;
         this.state   = (json.hasOwnProperty('state')) ? json.state : '';
