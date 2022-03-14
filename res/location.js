@@ -240,7 +240,7 @@ class Location {
         if (json.length === 1) {
 
             // Single Result
-            this.setProperties(json);
+            this.setProperties(json[0]);
             this.updateDisplay();
 
             // Hide Loading
