@@ -128,6 +128,7 @@ class Weather {
         const tod  = ((now >= rise) && (now <= set)) ? 'day' : 'night';
         const date = new Date();
         const full = this.weekdays[date.getDay()] + ', ' + this.months[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
+        const loc  = (this.location.state !== '') ? this.location.state + ', ' + this.location.country : this.location.country;
 
         // Page Elements
         const current  = document.getElementById('current');
@@ -143,7 +144,7 @@ class Weather {
         // Main Conditions
         mainCond.innerHTML  = `
             <h2>${this.location.city}</h2>
-            <div id="current_state">${this.location.state}, ${this.location.country}</div>
+            <div id="current_state">${loc}</div>
             <div id="current_dtg">${full}</div>
             <div id="current_info">
                 <div id="current_icon">${this.icons.weather(desc, tod)}</div>
