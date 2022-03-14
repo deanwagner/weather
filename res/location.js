@@ -10,8 +10,8 @@
  * @property {string} city    - City Name
  * @property {string} state   - State Name
  * @property {string} country - Country Code
- * @property {string} lat     - Latitude
- * @property {string} lon     - Longitude
+ * @property {number} lat     - Latitude
+ * @property {number} lon     - Longitude
  * @property {object} default - Default Location
  * @author Dean Wagner <info@deanwagner.net>
  */
@@ -25,12 +25,12 @@ class Location {
     city    = '';
     state   = '';
     country = '';
-    lat     = '';
-    lon     = '';
+    lat     = null;
+    lon     = null;
 
     // Default Location
     default = {
-        city    : 'Los Angeles',
+        name    : 'Los Angeles',
         state   : 'California',
         country : 'US',
         lat     : '34.0522',
@@ -52,32 +52,18 @@ class Location {
 
         // Load Location
         if (this.storage.hasOwnProperty('weather_location')) {
-
             // Stored Location
             const stored = JSON.parse(this.storage.getItem('weather_location'));
-            this.city    = stored.city;
-            this.state   = stored.state;
-            this.country = stored.country;
-            this.lat     = stored.lat;
-            this.lon     = stored.lon;
+            this.setProperties(stored);
         } else {
-
             // Default Location
-            this.city    = this.default.city;
-            this.state   = this.default.state;
-            this.country = this.default.country;
-            this.lat     = this.default.lat;
-            this.lon     = this.default.lon;
+            this.setProperties(this.default);
         }
 
         // Open Location Modal
         document.getElementById('location').addEventListener('click', (e) => {
             e.preventDefault();
-            document.getElementById('location_city').innerText    = this.city;
-            document.getElementById('location_state').innerText   = this.state;
-            document.getElementById('location_country').innerText = this.country;
-            document.getElementById('location_lat').innerText     = this.lat;
-            document.getElementById('location_lon').innerText     = this.lon;
+            this.updateDisplay();
             document.getElementById('location_search').innerText  = '';
             this.modal.open('modal_location');
         });
@@ -97,14 +83,12 @@ class Location {
                     navigator.geolocation.getCurrentPosition(this.setCCoords.bind(this));
                 } else if (result.state === 'denied') {
                     // Access Denied
-                    document.getElementById('error_message').innerText = 'Access to your location was denied.';
                     document.getElementById('location_loading').style.display = 'none';
-                    document.getElementById('location_error').style.display = 'block';
+                    this.error('Access to your location was denied.');
                 } else {
                     // Error
-                    document.getElementById('error_message').innerText = 'An unexpected error occurred while attempting to access your location.';
                     document.getElementById('location_loading').style.display = 'none';
-                    document.getElementById('location_error').style.display = 'block';
+                    this.error('An unexpected error occurred while attempting to access your location.');
                 }
             });
         });
@@ -112,30 +96,16 @@ class Location {
         // Search Submit
         document.querySelector('#location_set form').addEventListener('submit', (e) => {
             e.preventDefault();
-
-            const query = document.getElementById('location_search').value;
-            this.getCoords(query);
-
+            this.getCoords(document.getElementById('location_search').value);
             return false;
         });
 
         // Reset Location
         document.getElementById('location_reset').addEventListener('click', (e) => {
             e.preventDefault();
-
-            this.city    = this.default.city;
-            this.state   = this.default.state;
-            this.country = this.default.country;
-            this.lat     = this.default.lat;
-            this.lon     = this.default.lon;
-
-            document.getElementById('location_city').innerText    = this.city;
-            document.getElementById('location_state').innerText   = this.state;
-            document.getElementById('location_country').innerText = this.country;
-            document.getElementById('location_lat').innerText     = this.lat;
-            document.getElementById('location_lon').innerText     = this.lon;
+            this.setProperties(this.default);
+            this.updateDisplay();
             document.getElementById('location_search').innerText  = '';
-
             this.storage.removeItem('weather_location');
         });
 
@@ -144,11 +114,11 @@ class Location {
             e.preventDefault();
 
             this.storage.setItem('weather_location', JSON.stringify({
-                city    : this.city,
+                name    : this.city,
                 state   : this.state,
                 country : this.country,
-                lat     : this.lat,
-                lon     : this.lon
+                lat     : this.lat.toString(),
+                lon     : this.lon.toString()
             }));
 
             location.reload();
@@ -191,8 +161,8 @@ class Location {
     setCCoords(position) {
         this.lat = position.coords.latitude.toFixed(4);
         this.lon = position.coords.longitude.toFixed(4);
-        document.getElementById('location_lat').innerText = this.lat;
-        document.getElementById('location_lon').innerText = this.lon;
+        document.getElementById('location_lat').innerText = this.lat.toString();
+        document.getElementById('location_lon').innerText = this.lon.toString();
         this.getLocation();
     }
 
@@ -234,9 +204,8 @@ class Location {
             document.getElementById('location_set').style.display = 'block';
         } else {
             // No Result
-            document.getElementById('error_message').innerText = 'Your location could not be determined.';
             document.getElementById('location_loading').style.display = 'none';
-            document.getElementById('location_error').style.display = 'block';
+            this.error('Your location could not be determined.');
         }
     }
 
@@ -271,17 +240,8 @@ class Location {
         if (json.length === 1) {
 
             // Single Result
-            this.city    = json[0].name;
-            this.state   = (json[0].hasOwnProperty('state')) ? json[0].state : '';
-            this.country = json[0].country;
-            this.lat     = parseFloat(json[0].lat).toFixed(4);
-            this.lon     = parseFloat(json[0].lon).toFixed(4);
-
-            document.getElementById('location_city').innerText    = this.city;
-            document.getElementById('location_state').innerText   = this.state;
-            document.getElementById('location_country').innerText = this.country;
-            document.getElementById('location_lat').innerText     = this.lat.toString();
-            document.getElementById('location_lon').innerText     = this.lon.toString();
+            this.setProperties(json);
+            this.updateDisplay();
 
             // Hide Loading
             document.getElementById('location_loading').style.display = 'none';
@@ -318,9 +278,8 @@ class Location {
 
             // No Results
             locationSet.style.display = 'none';
-            document.getElementById('error_message').innerText = 'There are no matches to your search.';
             document.getElementById('location_loading').style.display = 'none';
-            document.getElementById('location_error').style.display = 'block';
+            this.error('There are no matches to your search.');
         }
     }
 
@@ -329,20 +288,42 @@ class Location {
      * @param {object} json - Location Data
      */
     locationConfirmed(json) {
-        this.city    = json.name;
-        this.state   = (json.hasOwnProperty('state')) ? json.state : '';
-        this.country = json.country;
-        this.lat     = parseFloat(json.lat).toFixed(4);
-        this.lon     = parseFloat(json.lon).toFixed(4);
+        this.setProperties(json);
+        this.updateDisplay();
+        document.getElementById('location_confirm').style.display = 'none';
+        document.getElementById('location_set').style.display = 'block';
+    }
 
+    /**
+     * Set Properties
+     * @param {object} prop - Properties Object
+     */
+    setProperties(prop) {
+        this.city    = prop.name;
+        this.state   = (prop.hasOwnProperty('state')) ? prop.state : '';
+        this.country = prop.country;
+        this.lat     = parseFloat(prop.lat).toFixed(4);
+        this.lon     = parseFloat(prop.lon).toFixed(4);
+    }
+
+    /**
+     * Update Location Display
+     */
+    updateDisplay() {
         document.getElementById('location_city').innerText    = this.city;
         document.getElementById('location_state').innerText   = this.state;
         document.getElementById('location_country').innerText = this.country;
         document.getElementById('location_lat').innerText     = this.lat.toString();
         document.getElementById('location_lon').innerText     = this.lon.toString();
+    }
 
-        document.getElementById('location_confirm').style.display = 'none';
-        document.getElementById('location_set').style.display = 'block';
+    /**
+     * Display Error Message
+     * @param {string} msg - Error Message
+     */
+    error(msg) {
+        document.getElementById('error_message').innerText = msg;
+        document.getElementById('location_error').style.display = 'block';
     }
 }
 

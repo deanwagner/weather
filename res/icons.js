@@ -3,54 +3,8 @@
 /**
  * Weather Icons
  * @class
- * @property {string} clearDay       - SVG Icon
- * @property {string} clearNight     - SVG Icon
- * @property {string} cloudy         - SVG Icon
- * @property {string} dust           - SVG Icon
- * @property {string} fog            - SVG Icon
- * @property {string} hail           - SVG Icon
- * @property {string} haze           - SVG Icon
- * @property {string} hurricane      - SVG Icon
- * @property {string} partlyDay      - SVG Icon
- * @property {string} partlyNight    - SVG Icon
- * @property {string} rain           - SVG Icon
- * @property {string} rainHeavy      - SVG Icon
- * @property {string} rainScattered  - SVG Icon
- * @property {string} sleet          - SVG Icon
- * @property {string} sleetScattered - SVG Icon
- * @property {string} snow           - SVG Icon
- * @property {string} snowHeavy      - SVG Icon
- * @property {string} snowScattered  - SVG Icon
- * @property {string} storm          - SVG Icon
- * @property {string} stormScattered - SVG Icon
- * @property {string} stormSevere    - SVG Icon
- * @property {string} tornado        - SVG Icon
- * @property {string} wind           - SVG Icon
- *
- * @property {string} newMoon        - SVG Icon
- * @property {string} waxingCrescent - SVG Icon
- * @property {string} firstQuarter   - SVG Icon
- * @property {string} waxingGibbous  - SVG Icon
- * @property {string} fullMoon       - SVG Icon
- * @property {string} waningGibbous  - SVG Icon
- * @property {string} thirdQuarter   - SVG Icon
- * @property {string} waningCrescent - SVG Icon
- *
- * @property {string} feelsLike      - SVG Icon
- * @property {string} windSpeed      - SVG Icon
- * @property {string} cloudCover     - SVG Icon
- * @property {string} humidity       - SVG Icon
- * @property {string} pressure       - SVG Icon
- * @property {string} visibility     - SVG Icon
- * @property {string} uvIndex        - SVG Icon
- * @property {string} dewPoint       - SVG Icon
- * @property {string} sunrise        - SVG Icon
- * @property {string} sunset         - SVG Icon
- * @property {string} moonrise       - SVG Icon
- * @property {string} moonset        - SVG Icon
- * @property {string} tempHigh       - SVG Icon
- * @property {string} tempLow        - SVG Icon
- * @property {array}  phases         - Moon Phase Names
+ * @property {string} *      - SVG Icon
+ * @property {array}  phases - Moon Phase Names
  * @author Dean Wagner <info@deanwagner.net>
  */
 class Icons {
@@ -117,6 +71,14 @@ class Icons {
         'Third Quarter',
         'Waning Crescent'
     ];
+
+    /**
+     * Constructor
+     * @constructor
+     */
+    constructor() {
+        this.unused();
+    }
 
     /**
      * Get Weather Icon from Conditions
@@ -321,20 +283,6 @@ class Icons {
                 icon = this.tornado;
                 break;
 
-            // Leftovers
-            case (cond === 'hail'):
-                icon = this.hail;
-                break;
-            case (cond === 'scattered sleet'):
-                icon = this.sleetScattered;
-                break;
-            case (cond === 'scattered snow'):
-                icon = this.snowScattered;
-                break;
-            case (cond === 'hurricane'):
-                icon = this.hurricane;
-                break;
-
             default:
                 icon = this.partlyDay;
         }
@@ -395,6 +343,43 @@ class Icons {
      */
     fetch(icon) {
         return (this.hasOwnProperty(icon)) ? this[icon] : '';
+    }
+
+    /**
+     * This is just here so my IDE will stop
+     * complaining about unused properties.
+     *             ¯\_(ツ)_/¯
+     */
+    unused() {
+        let str = '';
+        switch (str) {
+            case 'hail':
+                str = this.hail;
+                break;
+            case 'scattered sleet':
+                str = this.sleetScattered;
+                break;
+            case 'scattered snow':
+                str = this.snowScattered;
+                break;
+            case 'hurricane':
+                str = this.hurricane;
+                break;
+            case 'feels like':
+                str = this.feelsLike;
+                break;
+            case 'dew point':
+                str = this.dewPoint;
+                break;
+            case 'high temp':
+                str = this.tempHigh;
+                break;
+            case 'low temp':
+                str = this.tempLow;
+                break;
+            default:
+                str = '';
+        }
     }
 }
 

@@ -30,7 +30,7 @@ class Weather {
     exclude  = 'minutely,hourly';
     token    = '08741ea66d7d6792d95ff754f4184d75';
 
-    // Weekdays
+    // Days of the Week
     weekdays = [
         'Sunday',
         'Monday',
@@ -41,7 +41,7 @@ class Weather {
         'Saturday'
     ];
 
-    // Months
+    // Months of the Year
     months = [
         'January',
         'February',
@@ -80,8 +80,8 @@ class Weather {
 
         // Build URL
         let url = 'https://api.openweathermap.org/data/2.5/onecall?';
-        url += 'lat=' + this.location.lat;
-        url += '&lon=' + this.location.lon;
+        url += 'lat=' + this.location.lat.toString();
+        url += '&lon=' + this.location.lon.toString();
 
         if (this.settings.unit !== 'standard') {
             url += '&units=' + this.settings.unit;
