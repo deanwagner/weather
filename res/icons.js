@@ -3,8 +3,8 @@
 /**
  * Weather Icons
  * @class
- * @property {string} *      - SVG Icon
- * @property {array}  phases - Moon Phase Names
+ * @property {string} * - SVG Icon
+ * @property {array} phases - Moon Phase Names
  * @author Dean Wagner <info@deanwagner.net>
  */
 class Icons {
